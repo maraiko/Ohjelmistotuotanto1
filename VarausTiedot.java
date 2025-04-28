@@ -7,13 +7,13 @@ public class VarausTiedot {
     private int asiakasId;
     private int mokkiId;
     private int laskuId;
-    private Date aloistuPaiva;
-    private Date lopetusPaiva;
-    private Date luotu;
-    private Date paivitetty;
+    private String aloistuPaiva;
+    private String lopetusPaiva;
+    private String luotu;
+    private String paivitetty;
 
 
-    public VarausTiedot(int varausId, int asiakasId, int mokkiId, int laskuId, Date aloistuPaiva, Date lopetusPaiva, Date luotu, Date paivitetty) {
+    public VarausTiedot() {
         this.varausId = varausId;
         this.asiakasId = asiakasId;
         this.mokkiId = mokkiId;
@@ -47,31 +47,29 @@ public class VarausTiedot {
     public void setLaskuId(int laskuId) {
         this.laskuId = laskuId;
     }
-    public Date getAloistuPaiva() {
+    public String getAloistuPaiva() {
         return aloistuPaiva;
     }
-    public void setAloistuPaiva(Date aloistuPaiva) {
+    public void setAloistuPaiva(String aloistuPaiva) {
         this.aloistuPaiva = aloistuPaiva;
     }
-    public Date getLopetusPaiva() {
+    public String getLopetusPaiva() {
         return lopetusPaiva;
     }
-    public void setLopetusPaiva(Date lopetusPaiva) {
+    public void setLopetusPaiva(String lopetusPaiva) {
         this.lopetusPaiva = lopetusPaiva;
     }
-    public Date getLuotu() {
+    public String getLuotu() {
         return luotu;
     }
-    public void setLuotu(Date luotu) {
+    public void setLuotu(String luotu) {
         this.luotu = luotu;
     }
-    public Date getPaivitetty() {
+    public String getPaivitetty() {
         return paivitetty;
     }
-    public void setPaivitetty(Date paivitetty) {
+    public void setPaivitetty(String paivitetty) {
         this.paivitetty = paivitetty;
     }
-
-
-
+}
 }
