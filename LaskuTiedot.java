@@ -42,10 +42,10 @@ public class LaskuTiedot {
     public void setHinta(float hinta) {
         this.hinta = hinta;
     }
-    public String getLskutusTapa() {
+    public String getLaskutusTapa() {
         return laskutusTapa;
     }
-    public void setLskutusTapa(String laskutusTapa) {
+    public void setLaskutusTapa(String laskutusTapa) {
         this.laskutusTapa = laskutusTapa;
     }
     public Date getEraPaiva() {
