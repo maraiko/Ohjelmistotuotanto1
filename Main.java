@@ -54,11 +54,11 @@ public class Main extends Application {
         /**
          * skenet
          */
-        Scene alkuIkkunaScene = new Scene(alkuIkkuna, 1000, 1000);
-        Scene varausIkkunaScene = new Scene(varausIkkuna, 1000, 1000);
-        Scene mokkiIkkunaScene = new Scene(mokkiIkkuna, 1000, 1000);
-        Scene laskuIkkunaScene = new Scene(laskuIkkuna, 1000, 1000);
-        Scene asiakasIkkunaScene = new Scene(asiakasIkkuna, 1000, 1000);
+        Scene alkuIkkunaScene = new Scene(alkuIkkuna, 1000, 700);
+        Scene varausIkkunaScene = new Scene(varausIkkuna, 1000, 700);
+        Scene mokkiIkkunaScene = new Scene(mokkiIkkuna, 1000, 700);
+        Scene laskuIkkunaScene = new Scene(laskuIkkuna, 1000, 700);
+        Scene asiakasIkkunaScene = new Scene(asiakasIkkuna, 1000, 700);
         primaryStage.setScene(alkuIkkunaScene);
         primaryStage.setTitle("mökkien hallintajärjestelmä");
         primaryStage.setResizable(false);
