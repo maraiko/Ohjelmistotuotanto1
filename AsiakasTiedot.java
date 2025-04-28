@@ -3,14 +3,14 @@ package com.example.ohjelmistotuotanto;
 public class AsiakasTiedot {
     private String sahkoposti;
     private String nimi;
-    private String puhellinnumero;
+    private String puhelinnumero;
     private String maa;
     private Boolean yritys;
 
-    public AsiakasTiedot(String sahkoposti, String nimi, String puhellinnumero, String maa, Boolean yritys) {
+    public AsiakasTiedot() {
         this.sahkoposti = sahkoposti;
         this.nimi = nimi;
-        this.puhellinnumero = puhellinnumero;
+        this.puhelinnumero = puhelinnumero;
         this.maa = maa;
         this.yritys = yritys;
     }
@@ -26,11 +26,11 @@ public class AsiakasTiedot {
     public void setNimi(String nimi) {
         this.nimi = nimi;
     }
-    public String getPuhellinnumero() {
-        return puhellinnumero;
+    public String getPuhelinnumero() {
+        return puhelinnumero;
     }
-    public void setPuhellinnumero(String puhellinnumero) {
-        this.puhellinnumero = puhellinnumero;
+    public void setPuhelinnumero(String puhelinnumero) {
+        this.puhelinnumero = this.puhelinnumero;
     }
     public String getMaa() {
         return maa;
@@ -39,8 +39,7 @@ public class AsiakasTiedot {
         this.maa = maa;
     }
     public Boolean getYritys() {
-        return yritys;
-    }
+        return yritys;}
     public void setYritys(Boolean yritys) {
         this.yritys = yritys;
     }
