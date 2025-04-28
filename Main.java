@@ -54,11 +54,11 @@ public class Main extends Application {
         /**
          * skenet
          */
-        Scene alkuIkkunaScene = new Scene(alkuIkkuna, 800, 600);
-        Scene varausIkkunaScene = new Scene(varausIkkuna, 800, 600);
-        Scene mokkiIkkunaScene = new Scene(mokkiIkkuna, 800, 600);
-        Scene laskuIkkunaScene = new Scene(laskuIkkuna, 800, 600);
-        Scene asiakasIkkunaScene = new Scene(asiakasIkkuna, 800, 600);
+        Scene alkuIkkunaScene = new Scene(alkuIkkuna, 1000, 1000);
+        Scene varausIkkunaScene = new Scene(varausIkkuna, 1000, 1000);
+        Scene mokkiIkkunaScene = new Scene(mokkiIkkuna, 1000, 1000);
+        Scene laskuIkkunaScene = new Scene(laskuIkkuna, 1000, 1000);
+        Scene asiakasIkkunaScene = new Scene(asiakasIkkuna, 1000, 1000);
         primaryStage.setScene(alkuIkkunaScene);
         primaryStage.setTitle("mökkien hallintajärjestelmä");
         primaryStage.setResizable(false);
@@ -106,7 +106,7 @@ public class Main extends Application {
          */
         HBox navigaatioNapitHBox = new HBox();
         navigaatioNapitHBox.setSpacing(10);
-        navigaatioNapitHBox.getChildren().addAll(varaukset, mokit, varaukset, laskut);
+        navigaatioNapitHBox.getChildren().addAll(varaukset, mokit, asiakkaat, laskut);
         /**
          * laskutiedot columniin
          */
@@ -130,7 +130,7 @@ public class Main extends Application {
         TableColumn<AsiakasTiedot, String> nimiCol = new TableColumn<>("Nimi");
         nimiCol.setCellValueFactory(new PropertyValueFactory<>("nimi"));
         TableColumn<AsiakasTiedot, String> puhelinnumeroCol = new TableColumn<>("Puhelinnumero");
-        puhelinnumeroCol.setCellValueFactory(new PropertyValueFactory<>("puhellinnumero"));
+        puhelinnumeroCol.setCellValueFactory(new PropertyValueFactory<>("puhelinnumero"));
         TableColumn<AsiakasTiedot, String> maaCol = new TableColumn<>("Maa");
         maaCol.setCellValueFactory(new PropertyValueFactory<>("maa"));
         TableColumn<AsiakasTiedot, Boolean> yritysCol = new TableColumn<>("Yritys");
@@ -140,8 +140,8 @@ public class Main extends Application {
          */
         TableColumn<MokkiTiedot, String> osoiteCol = new TableColumn<>("Osoite");
         osoiteCol.setCellValueFactory(new PropertyValueFactory<>("osoite"));
-        TableColumn<MokkiTiedot, String> tilaCol = new TableColumn<>("Tila");
-        tilaCol.setCellValueFactory(new PropertyValueFactory<>("tila"));
+        TableColumn<MokkiTiedot, String> tilaCol1 = new TableColumn<>("Tila");
+        tilaCol1.setCellValueFactory(new PropertyValueFactory<>("tila"));
         TableColumn<MokkiTiedot, Integer> huoneetCol = new TableColumn<>("Huoneet");
         huoneetCol.setCellValueFactory(new PropertyValueFactory<>("huoneet"));
         TableColumn<MokkiTiedot, Integer> kokoCol = new TableColumn<>("Koko (m²)");
@@ -155,27 +155,27 @@ public class Main extends Application {
          */
         TableColumn<VarausTiedot, Integer> varausIdCol = new TableColumn<>("Varaus ID");
         varausIdCol.setCellValueFactory(new PropertyValueFactory<>("varausId"));
-        TableColumn<VarausTiedot, Integer> asiakasIdCol = new TableColumn<>("Asiakas ID");
-        asiakasIdCol.setCellValueFactory(new PropertyValueFactory<>("asiakasId"));
+        TableColumn<VarausTiedot, Integer> asiakasIdCol1 = new TableColumn<>("Asiakas ID");
+        asiakasIdCol1.setCellValueFactory(new PropertyValueFactory<>("asiakasId"));
         TableColumn<VarausTiedot, Integer> mokkiIdCol = new TableColumn<>("Mökki ID");
         mokkiIdCol.setCellValueFactory(new PropertyValueFactory<>("mokkiId"));
-        TableColumn<VarausTiedot, Integer> laskuIdCol = new TableColumn<>("Lasku ID");
-        laskuIdCol.setCellValueFactory(new PropertyValueFactory<>("laskuId"));
+        TableColumn<VarausTiedot, Integer> laskuIdCol1 = new TableColumn<>("Lasku ID");
+        laskuIdCol1.setCellValueFactory(new PropertyValueFactory<>("laskuId"));
         TableColumn<VarausTiedot, Date> aloitusPaivaCol = new TableColumn<>("Aloituspäivä");
         aloitusPaivaCol.setCellValueFactory(new PropertyValueFactory<>("aloistuPaiva"));
         TableColumn<VarausTiedot, Date> lopetusPaivaCol = new TableColumn<>("Lopetuspäivä");
         lopetusPaivaCol.setCellValueFactory(new PropertyValueFactory<>("lopetusPaiva"));
-        TableColumn<VarausTiedot, Date> luotuCol = new TableColumn<>("Luotu");
-        luotuCol.setCellValueFactory(new PropertyValueFactory<>("luotu"));
-        TableColumn<VarausTiedot, Date> paivitettyCol = new TableColumn<>("Päivitetty");
-        paivitettyCol.setCellValueFactory(new PropertyValueFactory<>("paivitetty"));
+        TableColumn<VarausTiedot, Date> luotuCol1 = new TableColumn<>("Luotu");
+        luotuCol1.setCellValueFactory(new PropertyValueFactory<>("luotu"));
+        TableColumn<VarausTiedot, Date> paivitettyCol1 = new TableColumn<>("Päivitetty");
+        paivitettyCol1.setCellValueFactory(new PropertyValueFactory<>("paivitetty"));
         /**
          * lisätään columnit tablevieweihin
          */
         laskuTiedotTableView.getColumns().addAll(laskuIdCol, asiakasIdCol, tilaCol, hintaCol, laskutusTapaCol, eraPaivaCol);
         asiakasTiedotTableView.getColumns().addAll(sahkopostiCol, nimiCol, puhelinnumeroCol, maaCol, yritysCol);
-        mokkiTiedotTableView.getColumns().addAll(osoiteCol, tilaCol, huoneetCol, kokoCol, luotuCol, paivitettyCol);
-        varausTiedotTableView.getColumns().addAll(varausIdCol, asiakasIdCol, mokkiIdCol, laskuIdCol, aloitusPaivaCol, lopetusPaivaCol, luotuCol, paivitettyCol);
+        mokkiTiedotTableView.getColumns().addAll(osoiteCol, tilaCol1, huoneetCol, kokoCol, luotuCol, paivitettyCol);
+        varausTiedotTableView.getColumns().addAll(varausIdCol, asiakasIdCol1, mokkiIdCol, laskuIdCol1, aloitusPaivaCol, lopetusPaivaCol, luotuCol1, paivitettyCol1);
         laskuTiedotTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         asiakasTiedotTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         varausTiedotTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -229,63 +229,34 @@ public class Main extends Application {
          * tekstikentät varaustiedoille
          */
         TextField varausTextField = new TextField();
-        varausTextField.setPromptText("Varaus");
+        varausTextField.setPromptText("Varaus ID");
+
         TextField asiakasTextField = new TextField();
-        asiakasTextField.setPromptText("Asiakas");
+        asiakasTextField.setPromptText("Asiakas ID");
+
         TextField mokkiTextField = new TextField();
-        mokkiTextField.setPromptText("Mokki");
+        mokkiTextField.setPromptText("Mokki ID");
+
         TextField laskuTextField = new TextField();
-        laskuTextField.setPromptText("Lasku");
+        laskuTextField.setPromptText("Lasku ID");
+
         TextField aloitusPaivaTextField = new TextField();
-        aloitusPaivaTextField.setPromptText("AloitusPaiva");
+        aloitusPaivaTextField.setPromptText("Aloituspaiva");
+
         TextField lopetusPaivaTextField = new TextField();
-        lopetusPaivaTextField.setPromptText("lähtöpäivä");
+        lopetusPaivaTextField.setPromptText("Lähtöpäivä");
+
         TextField luotuTextField2 = new TextField();
         luotuTextField2.setPromptText("Luotu");
+
         TextField paivitettyTextField2 = new TextField();
         paivitettyTextField2.setPromptText("Paivitetty");
 
         /**
-         * Vboxien teko eri tekstikentille
-         * ensin varaustiedoille
-         */
-        VBox varausTietoVBox = new VBox();
-        varausTietoVBox.setPadding(new Insets(5, 5, 5, 5));
-        varausTietoVBox.setSpacing(10);
-        varausTietoVBox.getChildren().addAll(varausTextField, asiakasTextField, mokkiTextField, laskuTextField, aloitusPaivaTextField, lopetusPaivaTextField, luotuTextField2, paivitettyTextField2);
-        /**
-         *asiakastiedoille VBox
-         */
-        VBox asiakasTietoVBox = new VBox();
-        asiakasTietoVBox.setPadding(new Insets(5, 5, 5, 5));
-        asiakasTietoVBox.setSpacing(10);
-        asiakasTietoVBox.getChildren().addAll(sahkopostiTextField, nimiTextField, puhelinnumeroTextField, maaTextField, yritysTextField);
-        /**
-         * mökkitiedoille VBox
-         */
-        VBox mokkiTietoVBox = new VBox();
-        mokkiTietoVBox.setPadding(new Insets(5, 5, 5, 5));
-        mokkiTietoVBox.setSpacing(10);
-        mokkiTietoVBox.getChildren().addAll(osoiteTextField, tilaTextField2, huoneetTextField, kokoTextField, luotuTextField, paivitettyTextField);
-        /**
-         * laskutiedoille VBox
-         */
-        VBox laskuTietoVBox = new VBox();
-        laskuTietoVBox.setPadding(new Insets(5, 5, 5, 5));
-        laskuTietoVBox.setSpacing(10);
-        laskuTietoVBox.getChildren().addAll(varausTextField, asiakasTextField, tilaTextField, hintaTextField, laskutusTapaTextField, eraPaivaTextField);
-        /**
-         * poistonappien teko
-         */
-        Button poistaVaraustiedot = luoPoistaNappi(varausTiedotTableView);
-        Button poistaMokkiTiedot = luoPoistaNappi(mokkiTiedotTableView);
-        Button poistaLaskuTiedot = luoPoistaNappi(laskuTiedotTableView);
-        Button poistaAsiakasTiedot = luoPoistaNappi(asiakasTiedotTableView);
-        /**
          * talletanappien teko
          */
-        Button talletaLasku = new Button("Talleta");{
-        talletaLasku.setOnAction(actionEvent ->{
+        Button talletaVaraus = new Button("Talleta");
+        talletaVaraus.setOnAction(actionEvent ->{
             try {
                 VarausTiedot varaus = new VarausTiedot();
                 varaus.setVarausId(Integer.parseInt(varausTextField.getText()));
@@ -296,6 +267,7 @@ public class Main extends Application {
                 varaus.setLopetusPaiva(lopetusPaivaTextField.getText());
                 varaus.setLuotu(luotuTextField2.getText());
                 varaus.setPaivitetty(paivitettyTextField2.getText());
+                varausTiedotTableView.getItems().add(varaus);
 
                 varausTextField.clear();
                 asiakasTextField.clear();
@@ -308,9 +280,114 @@ public class Main extends Application {
 
         } catch (NumberFormatException e) {
                 throw new RuntimeException(e);
+            };
+        });
+
+
+        Button talletaLasku = new Button("Talleta");
+            talletaLasku.setOnAction(actionEvent ->{
+                try {
+                    LaskuTiedot lasku = new LaskuTiedot();
+                    lasku.setLaskuId(Integer.parseInt(laskuTextField.getText()));
+                    lasku.setAsiakasId(Integer.parseInt(asiakasTextField.getText()));
+                    lasku.setTila(Boolean.parseBoolean(tilaTextField.getText()));
+                    lasku.setHinta(Float.parseFloat(hintaTextField.getText()));
+                    lasku.setLaskutusTapa(laskutusTapaTextField.getText());
+                    lasku.setEraPaiva(eraPaivaTextField.getText());
+                    laskuTiedotTableView.getItems().add(lasku);
+
+                    laskuTextField.clear();
+                    asiakasTextField.clear();
+                    tilaTextField.clear();
+                    hintaTextField.clear();
+                    laskutusTapaTextField.clear();
+                    eraPaivaTextField.clear();
+                } catch (NumberFormatException e) {
+                    throw new RuntimeException(e);
+
+                };
+            });
+        Button talletaMokki = new Button("Talleta");
+            talletaMokki.setOnAction(actionEvent ->{
+                try {
+                    MokkiTiedot mokki = new MokkiTiedot();
+                    mokki.setOsoite(osoiteTextField.getText());
+                    mokki.setTila(Boolean.parseBoolean(tilaTextField.getText()));
+                    mokki.setHuoneet(Integer.parseInt(huoneetTextField.getText()));
+                    mokki.setKoko(Integer.parseInt(kokoTextField.getText()));
+                    mokki.setLuotu(luotuTextField2.getText());
+                    mokki.setPaivitetty(paivitettyTextField2.getText());
+                    mokkiTiedotTableView.getItems().add(mokki);
+
+                    osoiteTextField.clear();
+                    tilaTextField.clear();
+                    huoneetTextField.clear();
+                    kokoTextField.clear();
+                    luotuTextField2.clear();
+                    paivitettyTextField2.clear();
+
+                } catch (NumberFormatException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+        Button talletaAsiakas = new Button("Talleta");
+            talletaAsiakas.setOnAction(actionEvent ->{
+                try {
+                    AsiakasTiedot asiakas = new AsiakasTiedot();
+                    asiakas.setSahkoposti(sahkopostiTextField.getText());
+                    asiakas.setNimi(nimiTextField.getText());
+                    asiakas.setPuhelinnumero(puhelinnumeroTextField.getText());
+                    asiakas.setMaa(maaTextField.getText());
+                    asiakas.setYritys(Boolean.valueOf(yritysTextField.getText()));
+                    asiakasTiedotTableView.getItems().add(asiakas);
+
+                    sahkopostiTextField.clear();
+                    nimiTextField.clear();
+                    puhelinnumeroTextField.clear();
+                    maaTextField.clear();
+                    yritysTextField.clear();
+                } catch (NumberFormatException e) {
+                    throw new RuntimeException(e);
             }
-        }
-    }
+        });
+        /**
+         * poistonappien teko
+         */
+        Button poistaVaraustiedot = luoPoistaNappi(varausTiedotTableView);
+        Button poistaMokkiTiedot = luoPoistaNappi(mokkiTiedotTableView);
+        Button poistaLaskuTiedot = luoPoistaNappi(laskuTiedotTableView);
+        Button poistaAsiakasTiedot = luoPoistaNappi(asiakasTiedotTableView);
+        /**
+         * Vboxien teko eri tekstikentille
+         * ensin varaustiedoille
+         */
+        VBox varausTietoVBox = new VBox();
+        varausTietoVBox.setPadding(new Insets(5, 5, 5, 5));
+        varausTietoVBox.setSpacing(10);
+        varausTietoVBox.getChildren().addAll(varausTextField, asiakasTextField, mokkiTextField, laskuTextField, aloitusPaivaTextField, lopetusPaivaTextField, luotuTextField2, paivitettyTextField2, talletaVaraus, poistaVaraustiedot);
+        /**
+         *asiakastiedoille VBox
+         */
+        VBox asiakasTietoVBox = new VBox();
+        asiakasTietoVBox.setPadding(new Insets(5, 5, 5, 5));
+        asiakasTietoVBox.setSpacing(10);
+        asiakasTietoVBox.getChildren().addAll(sahkopostiTextField, nimiTextField, puhelinnumeroTextField, maaTextField, yritysTextField, talletaAsiakas, poistaAsiakasTiedot);
+        /**
+         * mökkitiedoille VBox
+         */
+        VBox mokkiTietoVBox = new VBox();
+        mokkiTietoVBox.setPadding(new Insets(5, 5, 5, 5));
+        mokkiTietoVBox.setSpacing(10);
+        mokkiTietoVBox.getChildren().addAll(osoiteTextField, tilaTextField2, huoneetTextField, kokoTextField, luotuTextField, paivitettyTextField, talletaMokki, poistaMokkiTiedot);
+        /**
+         * laskutiedoille VBox
+         */
+        VBox laskuTietoVBox = new VBox();
+        laskuTietoVBox.setPadding(new Insets(5, 5, 5, 5));
+        laskuTietoVBox.setSpacing(10);
+        laskuTietoVBox.getChildren().addAll(laskuIdTextField, asiakasIdTextField, tilaTextField, hintaTextField, laskutusTapaTextField, eraPaivaTextField, talletaLasku, poistaLaskuTiedot);
+
 
         /**
          * lisätään skeneihin napit ja tablet
