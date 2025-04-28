@@ -1,17 +1,14 @@
 package com.example.ohjelmistotuotanto;
-
-import java.util.Date;
-
 public class MokkiTiedot {
     private String osoite;
-    private String tila;
+    private Boolean tila;
     private int huoneet;
     private int koko;
-    private Date luotu;
-    private Date paivitetty;
+    private String luotu;
+    private String paivitetty;
 
 
-    public MokkiTiedot(String osoite, String tila, int huoneet, int koko, Date luotu, Date paivitetty) {
+    public MokkiTiedot(String osoite, Boolean tila, int huoneet, int koko, String luotu, String paivitetty) {
         this.osoite = osoite;
         this.tila = tila;
         this.huoneet = huoneet;
@@ -19,16 +16,21 @@ public class MokkiTiedot {
         this.luotu = luotu;
         this.paivitetty = paivitetty;
     }
+
+    public MokkiTiedot() {
+
+    }
+
     public String getOsoite() {
         return osoite;
     }
     public void setOsoite(String osoite) {
         this.osoite = osoite;
     }
-    public String getTila() {
+    public Boolean getTila() {
         return tila;
     }
-    public void setTila(String tila) {
+    public void setTila(Boolean tila) {
         this.tila = tila;
     }
     public int getHuoneet() {
@@ -43,17 +45,18 @@ public class MokkiTiedot {
     public void setKoko(int koko) {
         this.koko = koko;
     }
-    public Date getLuotu() {
+    public String getLuotu() {
         return luotu;
     }
-    public void setLuotu(Date luotu) {
+    public void setLuotu(String luotu) {
         this.luotu = luotu;
     }
-    public Date getPaivitetty() {
+    public String getPaivitetty() {
         return paivitetty;
     }
-    public void setPaivitetty(Date paivitetty) {
+    public void setPaivitetty(String paivitetty) {
         this.paivitetty = paivitetty;
     }
 
 }
+
