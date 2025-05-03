@@ -1,40 +1,24 @@
 package com.example.ohjelmistotuotanto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class LaskuTiedot {
     private int laskuId;
-    private int asiakasId;
-    private boolean tila;
     private float hinta;
-    private String laskutusTapa;
-    private Date eraPaiva;
+    private String laskutustapa;
+    private LocalDateTime erapaiva;
+    private boolean tila;
 
-    public LaskuTiedot(int laskuId, int asiakasId, boolean tila, float hinta, String laskutusTapa, Date eraPaiva) {
+    public LaskuTiedot(int laskuId, float hinta, String laskutustapa, LocalDateTime erapaiva, boolean tila) {
         this.laskuId = laskuId;
-        this.asiakasId = asiakasId;
-        this.tila = tila;
         this.hinta = hinta;
-        this.laskutusTapa = laskutusTapa;
-        this.eraPaiva = eraPaiva;
+        this.laskutustapa = laskutustapa;
+        this.erapaiva = erapaiva;
+        this.tila = tila;
     }
+
     public int getLaskuId() {
         return laskuId;
-    }
-    public void setLaskuId(int laskuId) {
-        this.laskuId = laskuId;
-    }
-    public int getAsiakasId() {
-        return asiakasId;
-    }
-    public void setAsiakasId(int asiakasId) {
-        this.asiakasId = asiakasId;
-    }
-    public boolean isTila() {
-        return tila;
-    }
-    public void setTila(boolean tila) {
-        this.tila = tila;
     }
     public float getHinta() {
         return hinta;
@@ -42,16 +26,22 @@ public class LaskuTiedot {
     public void setHinta(float hinta) {
         this.hinta = hinta;
     }
-    public String getLaskutusTapa() {
-        return laskutusTapa;
+    public void setLaskutustapa(String laskutustapa) {
+        this.laskutustapa = laskutustapa;
     }
-    public void setLaskutusTapa(String laskutusTapa) {
-        this.laskutusTapa = laskutusTapa;
+    public void setErapaiva(LocalDateTime erapaiva) {
+        this.erapaiva = erapaiva;
     }
-    public Date getEraPaiva() {
-        return eraPaiva;
+    public String getLaskutustapa() {
+        return laskutustapa;
     }
-    public void setEraPaiva(Date eraPaiva) {
-        this.eraPaiva = eraPaiva;
+    public LocalDateTime getErapaiva() {
+        return erapaiva;
+    }
+    public boolean getTila() {
+        return tila;
+    }
+    public void setTila(boolean tila) {
+        this.tila = tila;
     }
 }
