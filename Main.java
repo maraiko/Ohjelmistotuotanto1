@@ -33,9 +33,9 @@ public class Main extends Application {
     private final TableView<LaskuTiedot> laskuTiedotTableView = new TableView<>();
     private final TableView<AsiakasTiedot> asiakasTiedotTableView = new TableView<>();
 
-    private final String DB_URL = "";
-    private final String DB_NAME = "";
-    private final String DB_PASSWORD = "";
+    private final String DB_URL = "";    //LISÄÄ TIETOKANNAN URL
+    private final String DB_NAME = ""; //LISÄÄ TIETOKANNAN NIMI
+    private final String DB_PASSWORD = ""; //LISÄÄ TIETOKANNAN SALASANA
     private DbConnect dbConnect = new DbConnect();
 
     public static void main(String[] args) {
