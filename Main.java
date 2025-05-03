@@ -33,9 +33,9 @@ public class Main extends Application {
     private final TableView<LaskuTiedot> laskuTiedotTableView = new TableView<>();
     private final TableView<AsiakasTiedot> asiakasTiedotTableView = new TableView<>();
 
-    private final String DB_URL = "jdbc:mysql://127.0.0.1:3306/lomakyla";
-    private final String DB_NAME = "root";
-    private final String DB_PASSWORD = "admin";
+    private final String DB_URL = "";
+    private final String DB_NAME = "";
+    private final String DB_PASSWORD = "";
     private DbConnect dbConnect = new DbConnect();
 
     public static void main(String[] args) {
