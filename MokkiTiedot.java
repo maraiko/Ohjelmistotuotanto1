@@ -1,36 +1,42 @@
 package com.example.ohjelmistotuotanto;
+
+import java.time.LocalDateTime;
+
 public class MokkiTiedot {
+    private int id;
     private String osoite;
-    private Boolean tila;
-    private int huoneet;
+    private boolean tila;
+    private LocalDateTime paivitetty;
     private int koko;
-    private String luotu;
-    private String paivitetty;
+    private int huoneet;
+    private LocalDateTime luotu;
 
-
-    public MokkiTiedot(String osoite, Boolean tila, int huoneet, int koko, String luotu, String paivitetty) {
+    public MokkiTiedot(int id, String osoite, boolean tila, int huoneet, int koko, LocalDateTime paivitetty, LocalDateTime luotu) {
+        this.id = id;
         this.osoite = osoite;
         this.tila = tila;
         this.huoneet = huoneet;
         this.koko = koko;
-        this.luotu = luotu;
         this.paivitetty = paivitetty;
+        this.luotu = luotu;
     }
 
-    public MokkiTiedot() {
-
+    public int getId() {
+        return id;
     }
-
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getOsoite() {
         return osoite;
     }
     public void setOsoite(String osoite) {
         this.osoite = osoite;
     }
-    public Boolean getTila() {
+    public boolean getTila() {
         return tila;
     }
-    public void setTila(Boolean tila) {
+    public void setTila(boolean tila) {
         this.tila = tila;
     }
     public int getHuoneet() {
@@ -45,18 +51,17 @@ public class MokkiTiedot {
     public void setKoko(int koko) {
         this.koko = koko;
     }
-    public String getLuotu() {
+    public LocalDateTime getLuotu() {
         return luotu;
     }
-    public void setLuotu(String luotu) {
+    public void setLuotu(LocalDateTime luotu) {
         this.luotu = luotu;
     }
-    public String getPaivitetty() {
+    public LocalDateTime getPaivitetty() {
         return paivitetty;
     }
-    public void setPaivitetty(String paivitetty) {
+    public void setPaivitetty(LocalDateTime paivitetty) {
         this.paivitetty = paivitetty;
     }
 
 }
-
