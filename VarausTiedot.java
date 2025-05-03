@@ -1,74 +1,81 @@
 package com.example.ohjelmistotuotanto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class VarausTiedot {
     private int varausId;
-    private int asiakasId;
-    private int mokkiId;
-    private int laskuId;
-    private String aloistuPaiva;
-    private String lopetusPaiva;
-    private String luotu;
-    private String paivitetty;
+    private LocalDateTime aloituspaiva;
+    private LocalDateTime lopetuspaiva;
+    private LocalDateTime luotu;
+    private LocalDateTime paivitetty;
+    private int asiakas_id;
+    private int mokki_id;
+    private int lasku_id;
 
-
-    public VarausTiedot() {
-        this.varausId = varausId;
-        this.asiakasId = asiakasId;
-        this.mokkiId = mokkiId;
-        this.laskuId = laskuId;
-        this.aloistuPaiva = aloistuPaiva;
-        this.lopetusPaiva = lopetusPaiva;
+    public VarausTiedot(int varaus_id, LocalDateTime aloituspaiva, LocalDateTime lopetuspaiva, LocalDateTime luotu, LocalDateTime paivitetty, int asiakas_id, int mokki_Id, int lasku_Id) {
+        this.varausId = varaus_id;
+        this.aloituspaiva = aloituspaiva;
+        this.lopetuspaiva = lopetuspaiva;
         this.luotu = luotu;
         this.paivitetty = paivitetty;
+        this.asiakas_id = asiakas_id;
+        this.mokki_id = mokki_id;
+        this.lasku_id = lasku_id;
     }
+
     public int getVarausId() {
         return varausId;
     }
     public void setVarausId(int varausId) {
         this.varausId = varausId;
     }
-    public int getAsiakasId() {
-        return asiakasId;
+
+    public LocalDateTime getAloituspaiva() {
+        return aloituspaiva;
     }
-    public void setAsiakasId(int asiakasId) {
-        this.asiakasId = asiakasId;
+    public void setAloituspaiva(LocalDateTime aloituspaiva) {
+        this.aloituspaiva = aloituspaiva;
     }
-    public int getMokkiId() {
-        return mokkiId;
+
+    public LocalDateTime getLopetuspaiva() {
+        return lopetuspaiva;
     }
-    public void setMokkiId(int mokkiId) {
-        this.mokkiId = mokkiId;
+    public void setLopetuspaiva(LocalDateTime lopetuspaiva) {
+        this.lopetuspaiva = lopetuspaiva;
     }
-    public int getLaskuId() {
-        return laskuId;
-    }
-    public void setLaskuId(int laskuId) {
-        this.laskuId = laskuId;
-    }
-    public String getAloistuPaiva() {
-        return aloistuPaiva;
-    }
-    public void setAloistuPaiva(String aloistuPaiva) {
-        this.aloistuPaiva = aloistuPaiva;
-    }
-    public String getLopetusPaiva() {
-        return lopetusPaiva;
-    }
-    public void setLopetusPaiva(String lopetusPaiva) {
-        this.lopetusPaiva = lopetusPaiva;
-    }
-    public String getLuotu() {
+
+    public LocalDateTime getLuotu() {
         return luotu;
     }
-    public void setLuotu(String luotu) {
+    public void setLuotu(LocalDateTime luotu) {
         this.luotu = luotu;
     }
-    public String getPaivitetty() {
+
+    public LocalDateTime getPaivitetty() {
         return paivitetty;
     }
-    public void setPaivitetty(String paivitetty) {
+    public void setPaivitetty(LocalDateTime paivitetty) {
         this.paivitetty = paivitetty;
+    }
+
+    public int getAsiakasId() {
+        return asiakas_id;
+    }
+    public void setAsiakasId(int asiakas_id) {
+        this.asiakas_id = asiakas_id;
+    }
+
+    public int getMokkiId() {
+        return mokki_id;
+    }
+    public void setMokkiId(int mokki_id) {
+        this.mokki_id = mokki_id;
+    }
+
+    public int getLaskuId() {
+        return lasku_id;
+    }
+    public void setLaskuId(int lasku_id) {
+        this.lasku_id = lasku_id;
     }
 }
