@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 import java.sql.*;
 
+//Tässä luokassa on metodit tietojen hakua varten
 public class DbConnect {
 
     private final String DB_URL = ""; //LISÄÄ TIETOKANNAN URL
