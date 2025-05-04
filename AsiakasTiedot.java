@@ -1,5 +1,8 @@
 package com.example.ohjelmistotuotanto;
 
+/**
+ * Luokka asiakkaisiin liittyville tiedoille ja niiden käsittelylle SQL:ssä
+ */
 public class AsiakasTiedot {
     private int id;
     private String sahkoposti;
@@ -16,38 +19,52 @@ public class AsiakasTiedot {
         this.maa = maa;
         this.yritys = yritys;
     }
+
     public int getId(){
         return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getSahkoposti() {
         return sahkoposti;
     }
+
     public void setSahkoposti(String sahkoposti) {
         this.sahkoposti = sahkoposti;
     }
+
     public String getNimi() {
         return nimi;
     }
+
     public void setNimi(String nimi) {
         this.nimi = nimi;
     }
+
     public String getPuhelinnumero() {
         return puhelinnumero;
     }
+
     public void setPuhelinnumero(String puhelinnumero) {
         this.puhelinnumero = puhelinnumero;
     }
+
     public String getMaa() {
         return maa;
     }
+
     public void setMaa(String maa) {
         this.maa = maa;
     }
+
     public Boolean getYritys() {
         return yritys;
     }
+
     public void setYritys(Boolean yritys) {
         this.yritys = yritys;
     }
-
 }
