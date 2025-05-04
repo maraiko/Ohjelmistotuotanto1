@@ -1,3 +1,2 @@
 # Ohjelmistotuotanto1
-ohjelmistotuotanto1
-toimiiko
+Tiedostot kattavat Ohjelmistotuotanto 1 -projektin, joka on Mökkikylät-yrityksen sisäinen lomaKylä-järjestelmä. Järjestelmässä on tarkoitus hallinnoida Mökkikylät-yrityksen omistamien mökkien liittyviä varauksia, laskuja ja asiakkaita.
