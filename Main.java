@@ -22,40 +22,36 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
 
-
-
+/**
+ * Luokka graafiselle käyttöliittymälle
+ */
 public class Main extends Application {
-    /**
-     * tehdään tablieviewit tarvittaville tiedoille
-     */
+    // Näytetään kaikkien taulujen tiedot käyttöliittymässä
     private final TableView<VarausTiedot> varausTiedotTableView = new TableView<>();
     private final TableView<MokkiTiedot> mokkiTiedotTableView = new TableView<>();
     private final TableView<LaskuTiedot> laskuTiedotTableView = new TableView<>();
     private final TableView<AsiakasTiedot> asiakasTiedotTableView = new TableView<>();
 
-    private final String DB_URL = "";    //LISÄÄ TIETOKANNAN URL
-    private final String DB_NAME = ""; //LISÄÄ TIETOKANNAN NIMI
-    private final String DB_PASSWORD = ""; //LISÄÄ TIETOKANNAN SALASANA
-    private DbConnect dbConnect = new DbConnect();
+    // Tietokantaan liittyvät tiedot
+    private final DbConnect DBCONNECT = new DbConnect();
+    private final String DB_URL = DBCONNECT.getDB_URL();
+    private final String DB_NAME = DBCONNECT.getDB_NAME();
+    private final String DB_PASSWORD = DBCONNECT.getDB_PASSWORD();
 
     public static void main(String[] args) {
         launch(args);
-
     }
 
     @Override
     public void start(Stage primaryStage) {
-        /**
-         * borderpanet eri skeneille
-         */
+        // BorderPane-ikkunat jokaiselle ruudulle
         BorderPane alkuIkkuna = new BorderPane();
         BorderPane varausIkkuna = new BorderPane();
         BorderPane mokkiIkkuna = new BorderPane();
         BorderPane laskuIkkuna = new BorderPane();
         BorderPane asiakasIkkuna = new BorderPane();
-        /**
-         * skenet
-         */
+
+        // Ruudut ja näyttämö
         Scene alkuIkkunaScene = new Scene(alkuIkkuna, 1000, 700);
         Scene varausIkkunaScene = new Scene(varausIkkuna, 1000, 700);
         Scene mokkiIkkunaScene = new Scene(mokkiIkkuna, 1000, 700);
@@ -65,9 +61,8 @@ public class Main extends Application {
         primaryStage.setTitle("Mökkien hallintajärjestelmä");
         primaryStage.setResizable(false);
         primaryStage.show();
-        /**
-         * navigaatiopainikkeet
-         */
+
+        // Navigaatiopainikkeet
         Button varaukset = new Button("Varaukset");
         Button mokit = new Button("Mökit");
         Button asiakkaat = new Button("Asiakkaat");
@@ -76,9 +71,8 @@ public class Main extends Application {
         Button takaisin2 = new Button("Takaisin");
         Button takaisin3 = new Button("Takaisin");
         Button takaisin4 = new Button("Takaisin");
-        /**
-         * actionit napeille
-         */
+
+        // Nappien toiminnallisuus
         varaukset.setOnAction(actionEvent -> {
             primaryStage.setScene(varausIkkunaScene);
         });
@@ -104,9 +98,7 @@ public class Main extends Application {
             primaryStage.setScene(alkuIkkunaScene);
         });
 
-        /**
-         * asiakastiedot columniin
-         */
+        // Asiakastiedot tauluun
         TableColumn<AsiakasTiedot, Integer> asiakas_idCol = new TableColumn<>("Asiakas ID");
         asiakas_idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<AsiakasTiedot, String> sahkopostiCol = new TableColumn<>("Sähköposti");
@@ -119,9 +111,8 @@ public class Main extends Application {
         maaCol.setCellValueFactory(new PropertyValueFactory<>("maa"));
         TableColumn<AsiakasTiedot, Boolean> yritysCol = new TableColumn<>("Yritys");
         yritysCol.setCellValueFactory(new PropertyValueFactory<>("yritys"));
-        /**
-         * mökkitiedot columniin
-         */
+
+        // Mökkitiedot tauluun
         TableColumn<MokkiTiedot, Integer> mokki_IdCol = new TableColumn<>("Mökki ID");
         mokki_IdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<MokkiTiedot, String> osoiteCol = new TableColumn<>("Osoite");
@@ -136,9 +127,8 @@ public class Main extends Application {
         luotuCol.setCellValueFactory(new PropertyValueFactory<>("luotu"));
         TableColumn<MokkiTiedot, Date> paivitettyCol = new TableColumn<>("Päivitetty");
         paivitettyCol.setCellValueFactory(new PropertyValueFactory<>("paivitetty"));
-        /**
-         * laskutiedot columniin
-         */
+
+        // Laskutiedot tauluun
         TableColumn<LaskuTiedot, Integer> laskuIdCol = new TableColumn<>("Lasku ID");
         laskuIdCol.setCellValueFactory(new PropertyValueFactory<>("laskuId"));
         TableColumn<LaskuTiedot, Boolean> tilaCol = new TableColumn<>("Maksettu?");
@@ -149,9 +139,8 @@ public class Main extends Application {
         laskutusTapaCol.setCellValueFactory(new PropertyValueFactory<>("laskutustapa"));
         TableColumn<LaskuTiedot, LocalDateTime> erapaivaCol = new TableColumn<>("Eräpäivä");
         erapaivaCol.setCellValueFactory(new PropertyValueFactory<>("erapaiva"));
-        /**
-         * varaustiedot columniin
-         */
+
+        // Varaustiedot tauluun
         TableColumn<VarausTiedot, Integer> varausIdCol = new TableColumn<>("Varaus ID");
         varausIdCol.setCellValueFactory(new PropertyValueFactory<>("varausId"));
         TableColumn<VarausTiedot, String> asiakasIdCol = new TableColumn<>("Asiakas ID");
@@ -169,18 +158,16 @@ public class Main extends Application {
         TableColumn<VarausTiedot, Date> paivitetty_Col = new TableColumn<>("Päivitetty");
         paivitetty_Col.setCellValueFactory(new PropertyValueFactory<>("paivitetty"));
 
-        /**
-         * lisätään columnit tablevieweihin
-         */
+        // Sarakkeiden lisääminen tauluun
         asiakasTiedotTableView.getColumns().addAll(asiakas_idCol, sahkopostiCol, nimiCol, puhelinnumeroCol, maaCol, yritysCol);
         mokkiTiedotTableView.getColumns().addAll(mokki_IdCol, osoiteCol, tilaCol1, huoneetCol, kokoCol, luotuCol, paivitettyCol);
         laskuTiedotTableView.getColumns().addAll(laskuIdCol, tilaCol, hintaCol, laskutusTapaCol, erapaivaCol);
         varausTiedotTableView.getColumns().addAll(varausIdCol, asiakasIdCol, mokkiIdCol, lasku_IdCol, aloituspaivaCol, lopetuspaivaCol, luotu_Col, paivitetty_Col);
 
-        asiakasTiedotTableView.setItems(dbConnect.haeAsiakkaat());
-        mokkiTiedotTableView.setItems(dbConnect.haeMokit());
-        laskuTiedotTableView.setItems(dbConnect.haeLaskut());
-        varausTiedotTableView.setItems(dbConnect.haeVaraukset());
+        asiakasTiedotTableView.setItems(DBCONNECT.haeAsiakkaat());
+        mokkiTiedotTableView.setItems(DBCONNECT.haeMokit());
+        laskuTiedotTableView.setItems(DBCONNECT.haeLaskut());
+        varausTiedotTableView.setItems(DBCONNECT.haeVaraukset());
 
         laskuTiedotTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         asiakasTiedotTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -192,9 +179,7 @@ public class Main extends Application {
         laskuTiedotTableView.setEditable(true);
         varausTiedotTableView.setEditable(true);
 
-        /**
-         * Tehdään mökkitiedoista muokattavia
-         */
+        // Mökkitietojen muokkaaminen muokattaviksi
         osoiteCol.setCellFactory(TextFieldTableCell.forTableColumn());
         osoiteCol.setOnEditCommit(e -> {
             MokkiTiedot mokki = e.getRowValue();
@@ -234,9 +219,7 @@ public class Main extends Application {
             return solu;
         });
 
-        /**
-         * Tehdään laskutiedoista muokattavia
-         */
+        // Laskutietojen muokkaaminen muokattaviksi
         laskutusTapaCol.setCellFactory(TextFieldTableCell.forTableColumn());
         laskutusTapaCol.setOnEditCommit(e -> {
             LaskuTiedot lasku = e.getRowValue();
@@ -303,9 +286,7 @@ public class Main extends Application {
             return solu;
         });
 
-        /**
-         * Tehdään asiakastiedoista muokattavia
-         */
+        // Asiakastietojen muokkaaminen muokattaviksi
         sahkopostiCol.setCellFactory(TextFieldTableCell.forTableColumn());
         sahkopostiCol.setOnEditCommit(e -> {
             AsiakasTiedot asiakas = e.getRowValue();
@@ -346,16 +327,12 @@ public class Main extends Application {
             return solu;
         });
 
-        /**
-         * tehdään HBox alkuikkunan navigaatiopainikkeille
-         */
+        // Tehdään HBox alkuikkunan navigaatiopainikkeille
         HBox navigaatioNapitHBox = new HBox();
         navigaatioNapitHBox.setSpacing(10);
         navigaatioNapitHBox.getChildren().addAll(varaukset, mokit, asiakkaat, laskut);
-        /**
-         * tehdään tekstikentät eri skeneille
-         * ekana laskutustiedoille
-         */
+
+        // Tekstikentät laskutustietoruudulle
         TextField hintaTextField = new TextField();
         hintaTextField.setPromptText("Hinta");
         TextField laskutusTapaTextField = new TextField();
@@ -363,9 +340,8 @@ public class Main extends Application {
         DatePicker erapaivaDatePicker = new DatePicker();
         erapaivaDatePicker.setPromptText("Eräpäivä");
         CheckBox tilaCheckBox = new CheckBox("Maksettu");
-        /**
-         * tekstikentät asiakastiedoille
-         */
+
+        // Tekstikentät asiakastietoruudulle
         CheckBox yritysCheckBox = new CheckBox("Yritys");
         TextField sahkopostiTextField = new TextField();
         TextField nimiTextField = new TextField();
@@ -375,9 +351,8 @@ public class Main extends Application {
         nimiTextField.setPromptText("Nimi");
         puhelinnumeroTextField.setPromptText("Puhelinnumero");
         maaTextField.setPromptText("Maa");
-        /**
-         * tekstikentät mökkitiedoille
-         */
+
+        // Tekstikentät mökkitietoruudulle
         TextField osoiteTextField = new TextField();
         TextField huoneetTextField = new TextField();
         TextField kokoTextField = new TextField();
@@ -385,16 +360,14 @@ public class Main extends Application {
         osoiteTextField.setPromptText("Osoite");
         huoneetTextField.setPromptText("Huoneet");
         kokoTextField.setPromptText("Koko");
-        /**
-         * tekstikentät varaustiedoille
-         */
+
+        // Tekstikentät varaustietoruudulle
         DatePicker aloituspaivaDatePicker = new DatePicker();
         aloituspaivaDatePicker.setPromptText("Aloituspäivä");
         DatePicker lopetuspaivaDatePicker = new DatePicker();
         lopetuspaivaDatePicker.setPromptText("Lopetuspäivä");
-        /**
-         * Painike asiakkaan lisäämiselle
-         */
+
+        // Painike asiakkaan lisäämiselle
         Button lisaaAsiakasPainike = new Button("Lisää");
         lisaaAsiakasPainike.setOnAction(e -> {
             String sahkoposti = sahkopostiTextField.getText();
@@ -404,7 +377,7 @@ public class Main extends Application {
             boolean yritys = yritysCheckBox.isSelected();
 
             lisaaAsiakas(sahkoposti, nimi, puhelinnumero, maa, yritys);
-            asiakasTiedotTableView.setItems(dbConnect.haeAsiakkaat());
+            asiakasTiedotTableView.setItems(DBCONNECT.haeAsiakkaat());
 
             sahkopostiTextField.clear();
             nimiTextField.clear();
@@ -413,9 +386,7 @@ public class Main extends Application {
             yritysCheckBox.setSelected(false);
         });
 
-        /**
-         * Painike mökin lisäämiselle
-         */
+        // Painike mökin lisäämiselle
         Button lisaaMokkiPainike = new Button("Lisää");
         lisaaMokkiPainike.setOnAction(e -> {
             String osoite = osoiteTextField.getText();
@@ -427,7 +398,7 @@ public class Main extends Application {
 
 
             lisaaMokki(osoite, tila, huoneet, koko, paivitetty, luotu);
-            mokkiTiedotTableView.setItems(dbConnect.haeMokit());
+            mokkiTiedotTableView.setItems(DBCONNECT.haeMokit());
 
             osoiteTextField.clear();
             mokkiTilaCheckBox.setSelected(false);
@@ -435,9 +406,7 @@ public class Main extends Application {
             huoneetTextField.clear();
         });
 
-        /**
-         * Painike laskun lisäämiselle
-         */
+        // Painike laskun lisäämiselle
         Button lisaaLaskuPainike = new Button("Lisää");
         lisaaLaskuPainike.setOnAction(e -> {
             float hinta = Float.parseFloat(hintaTextField.getText());
@@ -446,7 +415,7 @@ public class Main extends Application {
             boolean tila = tilaCheckBox.isSelected();
 
             lisaaLasku(hinta, laskutustapa, erapaiva, tila);
-            laskuTiedotTableView.setItems(dbConnect.haeLaskut());
+            laskuTiedotTableView.setItems(DBCONNECT.haeLaskut());
 
             hintaTextField.clear();
             laskutusTapaTextField.clear();
@@ -454,90 +423,74 @@ public class Main extends Application {
             tilaCheckBox.setSelected(false);
         });
 
-        /**
-         * Painike asiakkaan poistamiselle
-         */
+        // Painike asiakkaan poistamiselle
         Button poistaAsiakasPainike = new Button("Poista");
         poistaAsiakasPainike.setOnAction(e -> poistaAsiakas());
 
-        /**
-         * Painike mökin poistamiselle
-         */
+        // Painike mökin poistamiselle
         Button poistaMokkiPainike = new Button("Poista");
         poistaMokkiPainike.setOnAction(e -> poistaMokki());
 
-        /**
-         * Painike laskun poistamiselle
-         */
+        // Painike laskun poistamiselle
         Button poistaLaskuPainike = new Button("Poista");
         poistaLaskuPainike.setOnAction(e -> poistaLasku());
 
-        /**
-         * Vboxien teko eri tekstikentille
-         * ensin varaustiedoille
-         */
+        // VBox varaustietoruudun tekstikentille
         VBox varausTietoVBox = new VBox();
         varausTietoVBox.setPadding(new Insets(5, 5, 5, 5));
         varausTietoVBox.setSpacing(10);
         varausTietoVBox.getChildren().addAll(aloituspaivaDatePicker, lopetuspaivaDatePicker);
 
-        /**
-         *asiakastiedoille VBox
-         */
+        // VBox asiakastietoruudun tekstikentille
         VBox asiakasTietoVBox = new VBox();
         asiakasTietoVBox.setPadding(new Insets(5, 5, 5, 5));
         asiakasTietoVBox.setSpacing(10);
         asiakasTietoVBox.getChildren().addAll(sahkopostiTextField, nimiTextField, puhelinnumeroTextField, maaTextField, yritysCheckBox, lisaaAsiakasPainike, poistaAsiakasPainike);
 
-        /**
-         * mökkitiedoille VBox
-         */
+        // VBox mökkitietoruudun tekstikentille
         VBox mokkiTietoVBox = new VBox();
         mokkiTietoVBox.setPadding(new Insets(5, 5, 5, 5));
         mokkiTietoVBox.setSpacing(10);
         mokkiTietoVBox.getChildren().addAll(osoiteTextField, huoneetTextField, kokoTextField, mokkiTilaCheckBox, lisaaMokkiPainike, poistaMokkiPainike);
 
-        /**
-         * laskutiedoille VBox
-         */
+        // VBox laskutietoruudun tekstikentille
         VBox laskuTietoVBox = new VBox();
         laskuTietoVBox.setPadding(new Insets(5, 5, 5, 5));
         laskuTietoVBox.setSpacing(10);
         laskuTietoVBox.getChildren().addAll(hintaTextField, laskutusTapaTextField, erapaivaDatePicker, tilaCheckBox, lisaaLaskuPainike, poistaLaskuPainike);
 
-
-        /**
-         * lisätään skeneihin napit ja tablet
-         * ekana alkuikkuna
-         */
+        // Lisätään alkuikkunaruudulle napit ja taulut
         alkuIkkuna.setBottom(navigaatioNapitHBox);
-        /**
-         * laskuikkuna
-         */
+
+        // Lisätään laskutietoruudulle napit ja taulut
         laskuIkkuna.setRight(laskuTiedotTableView);
         laskuIkkuna.setLeft(laskuTietoVBox);
         laskuIkkuna.setBottom(takaisin);
-        /**
-         * asiakasikkuna
-         */
+
+        // Lisätään asiakastietoruudulle napit ja taulut
         asiakasIkkuna.setRight(asiakasTiedotTableView);
         asiakasIkkuna.setLeft(asiakasTietoVBox);
         asiakasIkkuna.setBottom(takaisin2);
-        /**
-         * mökki-ikkuna
-         */
+
+        // Lisätään mökkitietoruudulle napit ja taulut
         mokkiIkkuna.setRight(mokkiTiedotTableView);
         mokkiIkkuna.setLeft(mokkiTietoVBox);
         mokkiIkkuna.setBottom(takaisin3);
-        /**
-         * varausikkuna
-         */
+
+        // Lisätään varaustietoruudulle napit ja taulut
         varausIkkuna.setRight(varausTiedotTableView);
         varausIkkuna.setLeft(varausTietoVBox);
         varausIkkuna.setBottom(takaisin4);
-
     }
 
+    /**
+     * Metodi asiakkaan luomiselle
+     * @param sahkoposti asiakkaan sähköposti
+     * @param nimi asiakkaan nimi
+     * @param puhelinnumero asiakkaan puhelinnumero
+     * @param maa asiakkaan maa
+     * @param yritys onko asiakas yritys (false = ei, true = on)
+     */
     public void lisaaAsiakas(String sahkoposti, String nimi, String puhelinnumero, String maa, boolean yritys) {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_NAME, DB_PASSWORD);
              PreparedStatement ps = connection.prepareStatement("INSERT INTO asiakas (sahkoposti, nimi, puhelinnumero, maa, yritys) VALUES (?, ?, ?, ?, ?)",
@@ -555,6 +508,15 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Metodi mökin luomiselle
+     * @param osoite mökin osoite
+     * @param tila mökin tila (false = ei varattu, true = varattu) ????? onhan oikein
+     * @param huoneet mökin huoneiden määrät
+     * @param koko mökin koko neliökuutioissa
+     * @param paivitetty mökin päivitysaika tietokantaan
+     * @param luotu mökin lisäysaika tietokantaan
+     */
     public void lisaaMokki(String osoite, boolean tila, int huoneet, int koko, LocalDateTime paivitetty, LocalDateTime luotu) {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_NAME, DB_PASSWORD);
              PreparedStatement ps = connection.prepareStatement(
@@ -574,6 +536,13 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Metodi laskun lisäämiselle
+     * @param hinta laskun hinta
+     * @param laskutustapa laskutustapa
+     * @param erapaiva laskun eräpäivä
+     * @param tila onko lasku maksettu (false = ei, true = on)
+     */
     public void lisaaLasku(float hinta, String laskutustapa, LocalDateTime erapaiva, boolean tila) {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_NAME, DB_PASSWORD);
              PreparedStatement ps = connection.prepareStatement(
@@ -591,6 +560,9 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Metodi asiakkaan poistamiselle
+     */
     private void poistaAsiakas() {
         AsiakasTiedot valittu = asiakasTiedotTableView.getSelectionModel().getSelectedItem();
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_NAME, DB_PASSWORD);
@@ -604,6 +576,9 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Metodi mökin poistamiselle
+     */
     private void poistaMokki() {
         MokkiTiedot valittu = mokkiTiedotTableView.getSelectionModel().getSelectedItem();
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_NAME, DB_PASSWORD);
@@ -617,6 +592,9 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Metodi laskun poistamiselle
+     */
     private void poistaLasku() {
         LaskuTiedot valittu = laskuTiedotTableView.getSelectionModel().getSelectedItem();
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_NAME, DB_PASSWORD);
@@ -630,6 +608,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Metodi asiakkaan tietojen päivittämiselle
+     * @param asiakas muokattava asiakas
+     */
     private void paivitaAsiakas(AsiakasTiedot asiakas) {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_NAME, DB_PASSWORD);
              PreparedStatement ps = connection.prepareStatement("UPDATE asiakas SET sahkoposti = ?, nimi = ?, puhelinnumero = ?, maa = ?, yritys = ? WHERE id = ?")) {
@@ -648,6 +630,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Metodi mökin tietojen päivittämiselle
+     * @param mokki muokattava mökki
+     */
     private void paivitaMokki(MokkiTiedot mokki) {
         mokki.setPaivitetty(LocalDateTime.now());
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_NAME, DB_PASSWORD);
@@ -669,6 +655,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Metodi laskun tietojen päivittämiselle
+     * @param lasku muokattava lasku
+     */
     private void paivitaLasku(LaskuTiedot lasku) {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_NAME, DB_PASSWORD);
              PreparedStatement ps = connection.prepareStatement(
@@ -687,5 +677,3 @@ public class Main extends Application {
         }
     }
 }
-
-
