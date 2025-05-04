@@ -6,12 +6,25 @@ import java.time.LocalDateTime;
 
 import java.sql.*;
 
-//Tässä luokassa on metodit tietojen hakua varten
+/**
+ * Luokka SQL-tietokannan käsittelyyn ja muihin toimenpiteisiin
+ */
 public class DbConnect {
+    private final String DB_URL = ""; // LISÄÄ TIETOKANNAN URL
+    private final String DB_NAME = ""; // LISÄÄ TIETOKANNAN NIMI
+    private final String DB_PASSWORD = ""; // LISÄÄ TIETOKANNAN SALASANA
 
-    private final String DB_URL = ""; //LISÄÄ TIETOKANNAN URL
-    private final String DB_NAME = ""; //LISÄÄ TIETOKANNAN NIMI
-    private final String DB_PASSWORD = ""; //LISÄÄ TIETOKANNAN SALASANA
+    public String getDB_URL() {
+        return DB_URL;
+    }
+
+    public String getDB_NAME() {
+        return DB_NAME;
+    }
+
+    public String getDB_PASSWORD() {
+        return DB_PASSWORD;
+    }
 
     public ObservableList<AsiakasTiedot> haeAsiakkaat() {
         ObservableList<AsiakasTiedot> asiakasLista = FXCollections.observableArrayList();
@@ -30,9 +43,8 @@ public class DbConnect {
                 AsiakasTiedot asiakas = new AsiakasTiedot(id, sahkoposti, nimi, puhelinnumero, maa, yritys);
                 asiakasLista.add(asiakas);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+        catch (SQLException e) {e.printStackTrace();}
         return asiakasLista;
     }
 
@@ -58,10 +70,8 @@ public class DbConnect {
                 MokkiTiedot mokki = new MokkiTiedot(id, osoite, tila, huoneet, koko, paivitetty, luotu);
                 mokkiLista.add(mokki);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
+        catch (SQLException e) {e.printStackTrace();}
         return mokkiLista;
     }
 
@@ -82,10 +92,8 @@ public class DbConnect {
                 LaskuTiedot lasku = new LaskuTiedot(laskuId, hinta, laskutustapa, erapaiva, tila);
                 laskuLista.add(lasku);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
+        catch (SQLException e) {e.printStackTrace();}
         return laskuLista;
     }
 
@@ -114,10 +122,8 @@ public class DbConnect {
                 VarausTiedot varaus = new VarausTiedot(varausId, aloituspaiva, lopetuspaiva, luotu, paivitetty, asiakas_id, mokki_id, lasku_id);
                 varausLista.add(varaus);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
+        catch (SQLException e) {e.printStackTrace();}
         return varausLista;
     }
 }
