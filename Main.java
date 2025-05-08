@@ -8,9 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -44,13 +42,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // BorderPane-ikkunat jokaiselle ruudulle
+        // BorderPane-ikkunat jokaiselle ruudulle + gridpane aloitusikkunalle
         BorderPane alkuIkkuna = new BorderPane();
         BorderPane varausIkkuna = new BorderPane();
         BorderPane mokkiIkkuna = new BorderPane();
         BorderPane laskuIkkuna = new BorderPane();
         BorderPane asiakasIkkuna = new BorderPane();
-         GridPane aloitusIkkuna = new GridPane();
+        GridPane aloitusIkkuna = new GridPane();
 
         // Ruudut ja näyttämö
         Scene alkuIkkunaScene = new Scene(alkuIkkuna, 1000, 700);
@@ -64,7 +62,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-         //alkuruudun labelit ja sun muut
+        // Alkuruudun labelit ja muut tiedot
         Button guestLogin = new Button("Guest Login");
         Label userLabel = new Label("Käyttäjätunnus:");
         TextField userField = new TextField();
@@ -72,12 +70,13 @@ public class Main extends Application {
         PasswordField passField = new PasswordField();
         Button loginButton = new Button("Kirjaudu");
         Label messageLabel = new Label();
+
         // Login-napin toiminta
         loginButton.setOnAction(e -> {
             String username = userField.getText();
             String password = passField.getText();
 
-            // tarkistus
+            // Tarkistus
             if (username.equals("admin") && password.equals("salasana")) {
                 primaryStage.setScene(alkuIkkunaScene);
                 userField.clear();
@@ -88,11 +87,10 @@ public class Main extends Application {
                 passField.clear();
             }
         });
-
-        
         aloitusIkkuna.setPadding(new Insets(20));
         aloitusIkkuna.setHgap(20);
         aloitusIkkuna.setVgap(20);
+
         aloitusIkkuna.add(userLabel, 0, 0);
         aloitusIkkuna.add(userField, 1, 0);
         aloitusIkkuna.add(passLabel, 0, 1);
@@ -139,7 +137,7 @@ public class Main extends Application {
         });
         logout.setOnAction(actionEvent -> {
             primaryStage.setScene(aloitusIkkunaScene);
-        });    
+        });
         guestLogin.setOnAction(actionEvent -> {
             primaryStage.setScene(alkuIkkunaScene);
         });
@@ -551,11 +549,11 @@ public class Main extends Application {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            Alert alertLisaaAsiakas = new Alert(Alert.AlertType.ERROR);
-            alertLisaaAsiakas.setTitle("Virhe lisättäessä asiakkaan tietoja");
-            alertLisaaAsiakas.setHeaderText("Tietokantavirhe");
-            alertLisaaAsiakas.setContentText("Asiakkaan tietojen lisääminen epäonnistui.\nVirhe: " + e.getMessage());
-            alertLisaaAsiakas.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Tietojen lisäys epäonnistui");
+            alert.setHeaderText("Tietokantavirhe");
+            alert.setContentText("Asiakasta ei voitu lisätä tietokantaan.\nVirhe: " + e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -584,11 +582,11 @@ public class Main extends Application {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            Alert alertLisaaMokki = new Alert(Alert.AlertType.ERROR);
-            alertLisaaMokki.setTitle("Virhe lisättäessä mökkiä");
-            alertLisaaMokki.setHeaderText("Tietokantavirhe");
-            alertLisaaMokki.setContentText("Mökin lisääminen epäonnistui.\nVirhe: " + e.getMessage());
-            alertLisaaMokki.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Virhe lisättäessä mökkiä");
+            alert.setHeaderText("Tietokantavirhe");
+            alert.setContentText("Mökin lisääminen epäonnistui.\nVirhe: " + e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -613,11 +611,11 @@ public class Main extends Application {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            Alert alertLisaaLasku = new Alert(Alert.AlertType.ERROR);
-            alertLisaaLasku.setTitle("Virhe lisättäessä laskua");
-            alertLisaaLasku.setHeaderText("Tietokantavirhe");
-            alertLisaaLasku.setContentText("Laskun lisääminen epäonnistui.\nVirhe: " + e.getMessage());
-            alertLisaaLasku.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Virhe lisättäessä laskua");
+            alert.setHeaderText("Tietokantavirhe");
+            alert.setContentText("Laskun lisääminen epäonnistui.\nVirhe: " + e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -634,11 +632,11 @@ public class Main extends Application {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            Alert alertPoistaAsiakas = new Alert(Alert.AlertType.ERROR);
-            alertPoistaAsiakas.setTitle("Virhe poistettaessa asiakasta");
-            alertPoistaAsiakas.setHeaderText("Tietokantavirhe");
-            alertPoistaAsiakas.setContentText("Asiakkaan poistaminen epäonnistui.\nVirhe: " + e.getMessage());
-            alertPoistaAsiakas.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Virhe poistettaessa asiakasta");
+            alert.setHeaderText("Tietokantavirhe");
+            alert.setContentText("Asiakkaan poistaminen epäonnistui.\nVirhe: " + e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -655,11 +653,11 @@ public class Main extends Application {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            Alert alertPoistaMokki = new Alert(Alert.AlertType.ERROR);
-            alertPoistaMokki.setTitle("Virhe poistettaessa mökkiä");
-            alertPoistaMokki.setHeaderText("Tietokantavirhe");
-            alertPoistaMokki.setContentText("Mökin poistaminen epäonnistui.\nVirhe: " + e.getMessage());
-            alertPoistaMokki.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Virhe poistettaessa mökkiä");
+            alert.setHeaderText("Tietokantavirhe");
+            alert.setContentText("Mökin poistaminen epäonnistui.\nVirhe: " + e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -676,11 +674,11 @@ public class Main extends Application {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            Alert alertPoistaLasku = new Alert(Alert.AlertType.ERROR);
-            alertPoistaLasku.setTitle("Virhe poistettaessa laskua");
-            alertPoistaLasku.setHeaderText("Tietokantavirhe");
-            alertPoistaLasku.setContentText("Laskun poistaminen epäonnistui.\nVirhe: " + e.getMessage());
-            alertPoistaLasku.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Virhe poistettaessa laskua");
+            alert.setHeaderText("Tietokantavirhe");
+            alert.setContentText("Laskun poistaminen epäonnistui.\nVirhe: " + e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -703,11 +701,11 @@ public class Main extends Application {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            Alert alertPaivitaAsiakas = new Alert(Alert.AlertType.ERROR);
-            alertPaivitaAsiakas.setTitle("Virhe päivittäessä asiakkaan tietoja");
-            alertPaivitaAsiakas.setHeaderText("Tietokantavirhe");
-            alertPaivitaAsiakas.setContentText("Asiakastietojen päivitys epäonnistui.\nVirhe: " + e.getMessage());
-            alertPaivitaAsiakas.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Virhe päivittäessä asiakasta");
+            alert.setHeaderText("Tietokantavirhe");
+            alert.setContentText("Asiakastietojen päivitys epäonnistui.\nVirhe: " + e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -733,12 +731,11 @@ public class Main extends Application {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            Alert alertPaivitaMokki = new Alert(Alert.AlertType.ERROR);
-            alertPaivitaMokki.setTitle("Virhe päivittäessä mökin tietoja");
-            alertPaivitaMokki.setHeaderText("Tietokantavirhe");
-            alertPaivitaMokki.setContentText("mökin päivitys epäonnistui.\nVirhe: " + e.getMessage());
-            alertPaivitaMokki.showAndWait();
-        }
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Virhe päivittäessä mökin tietoja");
+            alert.setHeaderText("Tietokantavirhe");
+            alert.setContentText("mökin päivitys epäonnistui.\nVirhe: " + e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -761,11 +758,11 @@ public class Main extends Application {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            Alert alertPaivitaLasku = new Alert(Alert.AlertType.ERROR);
-            alertPaivitaLasku.setTitle("Virhe päivittäessä laskua");
-            alertPaivitaLasku.setHeaderText("Tietokantavirhe");
-            alertPaivitaLasku.setContentText("Laskun päivittäminen epäonnistui.\nVirhe: " + e.getMessage());
-            alertPaivitaLasku.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Virhe päivittäessä laskua");
+            alert.setHeaderText("Tietokantavirhe");
+            alert.setContentText("Laskun päivittäminen epäonnistui.\nVirhe: " + e.getMessage());
+            alert.showAndWait();
         }
     }
 }
