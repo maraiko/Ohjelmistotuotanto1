@@ -42,7 +42,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // BorderPane-ikkunat jokaiselle ruudulle + gridpane aloitusikkunalle
+        // BorderPane-ikkunat jokaiselle ruudulle + gridpane :D
         BorderPane alkuIkkuna = new BorderPane();
         BorderPane varausIkkuna = new BorderPane();
         BorderPane mokkiIkkuna = new BorderPane();
@@ -62,43 +62,6 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        // Alkuruudun labelit ja muut tiedot
-        Button guestLogin = new Button("Guest Login");
-        Label userLabel = new Label("Käyttäjätunnus:");
-        TextField userField = new TextField();
-        Label passLabel = new Label("Salasana:");
-        PasswordField passField = new PasswordField();
-        Button loginButton = new Button("Kirjaudu");
-        Label messageLabel = new Label();
-
-        // Login-napin toiminta
-        loginButton.setOnAction(e -> {
-            String username = userField.getText();
-            String password = passField.getText();
-
-            // Tarkistus
-            if (username.equals("admin") && password.equals("salasana")) {
-                primaryStage.setScene(alkuIkkunaScene);
-                userField.clear();
-                passField.clear();
-            } else {
-                messageLabel.setText("Väärä käyttäjätunnus tai salasana.");
-                userField.clear();
-                passField.clear();
-            }
-        });
-        aloitusIkkuna.setPadding(new Insets(20));
-        aloitusIkkuna.setHgap(20);
-        aloitusIkkuna.setVgap(20);
-
-        aloitusIkkuna.add(userLabel, 0, 0);
-        aloitusIkkuna.add(userField, 1, 0);
-        aloitusIkkuna.add(passLabel, 0, 1);
-        aloitusIkkuna.add(passField, 1, 1);
-        aloitusIkkuna.add(loginButton, 1, 2);
-        aloitusIkkuna.add(messageLabel, 1, 3);
-        aloitusIkkuna.add(guestLogin, 0, 2);
-
         // Navigaatiopainikkeet
         Button varaukset = new Button("Varaukset");
         Button mokit = new Button("Mökit");
@@ -109,6 +72,22 @@ public class Main extends Application {
         Button takaisin3 = new Button("Takaisin");
         Button takaisin4 = new Button("Takaisin");
         Button logout = new Button("Logout");
+        Button lisaaAsiakasPainike = new Button("Lisää");
+        Button lisaaMokkiPainike = new Button("Lisää");
+        Button lisaaLaskuPainike = new Button("Lisää");
+        Button guestLogin = new Button("Guest Login");
+
+        // Painike asiakkaan poistamiselle
+        Button poistaAsiakasPainike = new Button("Poista");
+        poistaAsiakasPainike.setOnAction(e -> poistaAsiakas());
+
+        // Painike mökin poistamiselle
+        Button poistaMokkiPainike = new Button("Poista");
+        poistaMokkiPainike.setOnAction(e -> poistaMokki());
+
+        // Painike laskun poistamiselle
+        Button poistaLaskuPainike = new Button("Poista");
+        poistaLaskuPainike.setOnAction(e -> poistaLasku());
 
         // Nappien toiminnallisuus
         varaukset.setOnAction(actionEvent -> {
@@ -140,7 +119,61 @@ public class Main extends Application {
         });
         guestLogin.setOnAction(actionEvent -> {
             primaryStage.setScene(alkuIkkunaScene);
+            asiakasTiedotTableView.setEditable(false);
+            mokkiTiedotTableView.setEditable(false);
+            laskuTiedotTableView.setEditable(false);
+            varausTiedotTableView.setEditable(false);
+            lisaaAsiakasPainike.setVisible(false);
+            lisaaMokkiPainike.setVisible(false);
+            lisaaLaskuPainike.setVisible(false);
+            poistaAsiakasPainike.setVisible(false);
+            poistaMokkiPainike.setVisible(false);
+            poistaLaskuPainike.setVisible(false);
         });
+        //alkuruudun labelit ja sun muut
+        Label userLabel = new Label("Käyttäjätunnus:");
+        TextField userField = new TextField();
+        Label passLabel = new Label("Salasana:");
+        PasswordField passField = new PasswordField();
+        Button loginButton = new Button("Kirjaudu");
+        Label messageLabel = new Label();
+        // Login-napin toiminta
+        loginButton.setOnAction(e -> {
+            String username = userField.getText();
+            String password = passField.getText();
+
+            // tarkistus
+            if (username.equals("admin") && password.equals("salasana")) {
+                primaryStage.setScene(alkuIkkunaScene);
+                userField.clear();
+                passField.clear();
+                asiakasTiedotTableView.setEditable(true);
+                mokkiTiedotTableView.setEditable(true);
+                laskuTiedotTableView.setEditable(true);
+                varausTiedotTableView.setEditable(true);
+                lisaaAsiakasPainike.setVisible(true);
+                lisaaMokkiPainike.setVisible(true);
+                lisaaLaskuPainike.setVisible(true);
+                poistaAsiakasPainike.setVisible(true);
+                poistaMokkiPainike.setVisible(true);
+                poistaLaskuPainike.setVisible(true);
+            } else {
+                messageLabel.setText("Väärä käyttäjätunnus tai salasana.");
+                userField.clear();
+                passField.clear();
+            }
+        });
+        aloitusIkkuna.setPadding(new Insets(20));
+        aloitusIkkuna.setHgap(20);
+        aloitusIkkuna.setVgap(20);
+
+        aloitusIkkuna.add(userLabel, 0, 0);
+        aloitusIkkuna.add(userField, 1, 0);
+        aloitusIkkuna.add(passLabel, 0, 1);
+        aloitusIkkuna.add(passField, 1, 1);
+        aloitusIkkuna.add(loginButton, 1, 2);
+        aloitusIkkuna.add(messageLabel, 1, 3);
+        aloitusIkkuna.add(guestLogin, 0, 2);
 
         // Asiakastiedot tauluun
         TableColumn<AsiakasTiedot, Integer> asiakas_idCol = new TableColumn<>("Asiakas ID");
@@ -217,11 +250,6 @@ public class Main extends Application {
         asiakasTiedotTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         varausTiedotTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         mokkiTiedotTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-        asiakasTiedotTableView.setEditable(true);
-        mokkiTiedotTableView.setEditable(true);
-        laskuTiedotTableView.setEditable(true);
-        varausTiedotTableView.setEditable(true);
 
         // Mökkitietojen muokkaaminen muokattaviksi
         osoiteCol.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -412,7 +440,6 @@ public class Main extends Application {
         lopetuspaivaDatePicker.setPromptText("Lopetuspäivä");
 
         // Painike asiakkaan lisäämiselle
-        Button lisaaAsiakasPainike = new Button("Lisää");
         lisaaAsiakasPainike.setOnAction(e -> {
             String sahkoposti = sahkopostiTextField.getText();
             String nimi = nimiTextField.getText();
@@ -431,7 +458,6 @@ public class Main extends Application {
         });
 
         // Painike mökin lisäämiselle
-        Button lisaaMokkiPainike = new Button("Lisää");
         lisaaMokkiPainike.setOnAction(e -> {
             String osoite = osoiteTextField.getText();
             LocalDateTime paivitetty = LocalDateTime.now();
@@ -451,7 +477,6 @@ public class Main extends Application {
         });
 
         // Painike laskun lisäämiselle
-        Button lisaaLaskuPainike = new Button("Lisää");
         lisaaLaskuPainike.setOnAction(e -> {
             float hinta = Float.parseFloat(hintaTextField.getText());
             String laskutustapa = laskutusTapaTextField.getText();
@@ -467,17 +492,6 @@ public class Main extends Application {
             tilaCheckBox.setSelected(false);
         });
 
-        // Painike asiakkaan poistamiselle
-        Button poistaAsiakasPainike = new Button("Poista");
-        poistaAsiakasPainike.setOnAction(e -> poistaAsiakas());
-
-        // Painike mökin poistamiselle
-        Button poistaMokkiPainike = new Button("Poista");
-        poistaMokkiPainike.setOnAction(e -> poistaMokki());
-
-        // Painike laskun poistamiselle
-        Button poistaLaskuPainike = new Button("Poista");
-        poistaLaskuPainike.setOnAction(e -> poistaLasku());
 
         // VBox varaustietoruudun tekstikentille
         VBox varausTietoVBox = new VBox();
