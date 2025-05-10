@@ -10,9 +10,9 @@ import java.sql.*;
  * Luokka SQL-tietokannan käsittelyyn ja muihin toimenpiteisiin
  */
 public class DbConnect {
-    private final String DB_URL = "jdbc:mysql://127.0.0.1:3306/lomakyla";
-    private final String DB_NAME = "root";
-    private final String DB_PASSWORD = "admin";
+    private final String DB_URL = "";
+    private final String DB_NAME = "";
+    private final String DB_PASSWORD = "";
 
     public String getDB_URL() {
         return DB_URL;
