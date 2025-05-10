@@ -13,13 +13,15 @@ public class MokkiTiedot {
     private int koko;
     private int huoneet;
     private LocalDateTime luotu;
+    private float hinta_per_yo;
 
-    public MokkiTiedot(int id, String osoite, boolean tila, int huoneet, int koko, LocalDateTime paivitetty, LocalDateTime luotu) {
+    public MokkiTiedot(int id, String osoite, boolean tila, int huoneet, int koko, float hinta_per_yo, LocalDateTime paivitetty, LocalDateTime luotu) {
         this.id = id;
         this.osoite = osoite;
         this.tila = tila;
         this.huoneet = huoneet;
         this.koko = koko;
+        this.hinta_per_yo = hinta_per_yo;
         this.paivitetty = paivitetty;
         this.luotu = luotu;
     }
@@ -64,6 +66,14 @@ public class MokkiTiedot {
         this.koko = koko;
     }
 
+    public float getHinta_per_yo() {
+        return hinta_per_yo;
+    }
+
+    public void setHinta_per_yo(float hinta_per_yo){
+        this.hinta_per_yo = hinta_per_yo;
+    }
+
     public LocalDateTime getLuotu() {
         return luotu;
     }
@@ -79,4 +89,7 @@ public class MokkiTiedot {
     public void setPaivitetty(LocalDateTime paivitetty) {
         this.paivitetty = paivitetty;
     }
+
 }
+
+
