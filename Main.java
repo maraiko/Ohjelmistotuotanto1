@@ -206,8 +206,6 @@ public class Main extends Application {
         aloitusKeski.setPadding(new Insets(20));
         aloitusKeski.setHgap(20);
         aloitusKeski.setVgap(20);
-        aloitusKeski.setMaxHeight(220);
-        aloitusKeski.setMaxWidth(400);
         aloitusKeski.setAlignment(Pos.CENTER);
 
         aloitusKeski.add(userLabel, 0, 0);
@@ -217,7 +215,13 @@ public class Main extends Application {
         aloitusKeski.add(loginButton, 0, 2);
         aloitusKeski.add(messageLabel, 1, 2);
 
-
+        userField.setMaxWidth(175);
+        userField.setPrefHeight(32);
+        passField.setMaxWidth(175);
+        passField.setPrefHeight(32);
+        aloitusKeski.setMaxHeight(220);
+        aloitusKeski.setMaxWidth(400);
+        
         // Muut audiovisuaaliset jutut aloitusikkunaan
         Image logo = new Image("file:parhainlogoikina.png");
         ImageView naytalogo = new ImageView(logo);
@@ -233,99 +237,91 @@ public class Main extends Application {
         BorderPane.setAlignment(guestLogin, Pos.CENTER_RIGHT);
 
         // CSS tyylimäärittelyt
-        aloitusKeski.setStyle(
-                "-fx-background-color: linear-gradient(to bottom right, #e0f7fa, #f1f8e9);" +
-                "-fx-padding: 0px;" +
-                        "-fx-hgap: 5px;" +
-                        "-fx-vgap: 5px;" +
-                        "-fx-background-radius: 20px;" +
-                        "-fx-border-radius: 20px;" +
-                        "-fx-border-color: #0099FF;" +
-                        "-fx-border-width: 2px;"
+        aloitusKeski.setStyle("-fx-background-color: linear-gradient(to bottom right, #e0f7fa, #f1f8e9);" +
+                            "-fx-padding: 0px;" +
+                            "-fx-hgap: 5px;" +
+                            "-fx-vgap: 5px;" +
+                            "-fx-background-radius: 20px;" +
+                            "-fx-border-radius: 20px;" +
+                            "-fx-border-color: #0099FF;" +
+                            "-fx-border-width: 2px;"
         );
 
-        String messageLabelStyle =
-                "-fx-background-color: linear-gradient(to right, #FF4B2B, #FF416C);" +
-                        "-fx-text-fill: white;" +
-                        "-fx-font-size: 14px;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-padding: 10px 20px;" +
-                        "-fx-background-radius: 20px;" +
-                        "-fx-border-radius: 20px;" +
-                        "-fx-border-color: transparent;";
+        String messageLabelStyle = "-fx-background-color: linear-gradient(to right, #FF4B2B, #FF416C);" +
+                                    "-fx-text-fill: white;" +
+                                    "-fx-font-size: 14px;" +
+                                    "-fx-font-weight: bold;" +
+                                    "-fx-padding: 10px 20px;" +
+                                    "-fx-background-radius: 20px;" +
+                                    "-fx-border-radius: 20px;" +
+                                    "-fx-border-color: transparent;";
 
-        String labelStyle =
-                "-fx-background-color: linear-gradient(to right, #FFB6C1, #E6A8D7);" +
-                        "-fx-text-fill: white;" +
-                        "-fx-font-size: 15px;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-padding: 10px 20px;" +
-                        "-fx-background-radius: 20px;" +
-                        "-fx-border-radius: 20px;" +
-                        "-fx-border-color: transparent;" +
-                        "-fx-pref-width: 153px;" +
-                        "-fx-alignment: center;";
+        String labelStyle = "-fx-background-color: linear-gradient(to right, #FFB6C1, #E6A8D7);" +
+                            "-fx-text-fill: white;" +
+                            "-fx-font-size: 15px;" +
+                            "-fx-font-weight: bold;" +
+                            "-fx-padding: 10px 20px;" +
+                            "-fx-background-radius: 20px;" +
+                            "-fx-border-radius: 20px;" +
+                            "-fx-border-color: transparent;" +
+                            "-fx-pref-width: 153px;" +
+                            "-fx-alignment: center;";
 
         String buttonStyle = "-fx-background-color: linear-gradient(to right, #33CCB3, #0099FF);" +
-                "-fx-text-fill: white;" +
-                "-fx-font-weight: bold;" +
-                "-fx-font-size: 18px;" +
-                "-fx-padding: 10px 20px;" +
-                "-fx-background-radius: 20px;" +
-                "-fx-border-radius: 20px;" +
-                "-fx-border-color: transparent;" +
-                "-fx-cursor: hand;" +
-                "-fx-opacity: 0.9;";
+                            "-fx-text-fill: white;" +
+                            "-fx-font-weight: bold;" +
+                            "-fx-font-size: 18px;" +
+                            "-fx-padding: 10px 20px;" +
+                            "-fx-background-radius: 20px;" +
+                            "-fx-border-radius: 20px;" +
+                            "-fx-border-color: transparent;" +
+                            "-fx-cursor: hand;" +
+                            "-fx-opacity: 0.9;";
 
-        String buttonStyle2 =
-                "-fx-background-color: linear-gradient(to right, #fbc02d, #f57f17);" +
-                        "-fx-text-fill: white;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-font-size: 28px;" +
-                        "-fx-padding: 10px 20px;" +
-                        "-fx-background-radius: 20px;" +
-                        "-fx-border-radius: 20px;" +
-                        "-fx-border-color: transparent;" +
-                        "-fx-cursor: hand;" +
-                        "-fx-opacity: 0.95;";
+        String buttonStyle2 = "-fx-background-color: linear-gradient(to right, #fbc02d, #f57f17);" +
+                                "-fx-text-fill: white;" +
+                                "-fx-font-weight: bold;" +
+                                "-fx-font-size: 28px;" +
+                                "-fx-padding: 10px 20px;" +
+                                "-fx-background-radius: 20px;" +
+                                "-fx-border-radius: 20px;" +
+                                "-fx-border-color: transparent;" +
+                                "-fx-cursor: hand;" +
+                                "-fx-opacity: 0.95;";
 
-        String textfieldStyle =
-                "-fx-background-color: #E1F5FE; " +
-                        "-fx-background-radius: 10px; " +
-                        "-fx-border-color: grey; " +
-                        "-fx-border-width: 1px; " +
-                        "-fx-border-radius: 10px; " +
-                        "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 5); " +
-                        "-fx-padding: 5px; " +
-                        "-fx-font-family: 'Montserrat'; " +
-                        "-fx-font-size: 16px; " +
-                        "-fx-font-weight: normal;";
+        String textfieldStyle = "-fx-background-color: #E1F5FE; " +
+                                "-fx-background-radius: 10px; " +
+                                "-fx-border-color: grey; " +
+                                "-fx-border-width: 1px; " +
+                                "-fx-border-radius: 10px; " +
+                                "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 5); " +
+                                "-fx-padding: 5px; " +
+                                "-fx-font-family: 'Montserrat'; " +
+                                "-fx-font-size: 16px; " +
+                                "-fx-font-weight: normal;";
 
-        String checkboxStyle =
-                "-fx-font-size: 18px;" +
-                        "-fx-text-fill: #333;";
+        String checkboxStyle = "-fx-font-size: 18px;" +
+                                "-fx-text-fill: #333;";
+
+        String tableviewStyle = "-fx-font-size: 15px;" +
+                                "-fx-background-color: white;" +
+                                "-fx-table-cell-border-color: transparent;";
 
         alkuIkkuna.setStyle("-fx-background-color: linear-gradient(to right, #FFAFBD, #C9FFBF);");
 
         userField.setStyle(textfieldStyle);
         passField.setStyle(textfieldStyle);
-        userField.setMaxWidth(175);
-        userField.setPrefHeight(32);
-        passField.setMaxWidth(175);
-        passField.setPrefHeight(32);
-
+        
         messageLabel.setStyle(messageLabelStyle);
-
         userLabel.setStyle(labelStyle);
         passLabel.setStyle(labelStyle);
-
-        logout.setStyle(buttonStyle);
 
         varaukset.setStyle(buttonStyle2);
         mokit.setStyle(buttonStyle2);
         laskut.setStyle(buttonStyle2);
         asiakkaat.setStyle(buttonStyle2);
 
+        logout.setStyle(buttonStyle);
         loginButton.setStyle(buttonStyle);
         guestLogin.setStyle(buttonStyle);
         takaisin.setStyle(buttonStyle);
@@ -413,10 +409,6 @@ public class Main extends Application {
         mokkiTiedotTableView.getColumns().addAll(mokki_IdCol, osoiteCol, tilaCol1, huoneetCol, kokoCol, hinta_per_yoCol, luotuCol, paivitettyCol);
         laskuTiedotTableView.getColumns().addAll(laskuIdCol, tilaCol, hintaCol, laskutusTapaCol, erapaivaCol);
         varausTiedotTableView.getColumns().addAll(varausIdCol, lasku_IdCol, asiakasNimiCol, mokkiOsoiteCol, aloituspaivaCol, lopetuspaivaCol, luotu_Col, paivitetty_Col);
-
-        String tableviewStyle = "-fx-font-size: 15px;" +
-                                "-fx-background-color: white;" +
-                                "-fx-table-cell-border-color: transparent;";
 
         asiakasTiedotTableView.setStyle(tableviewStyle);
         mokkiTiedotTableView.setStyle(tableviewStyle);
