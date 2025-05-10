@@ -47,7 +47,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // BorderPane-ikkunat jokaiselle ruudulle + gridpane aloitusikkunalle
+        // BorderPane-ikkunat jokaiselle ruudulle
         BorderPane alkuIkkuna = new BorderPane();
         BorderPane varausIkkuna = new BorderPane();
         BorderPane mokkiIkkuna = new BorderPane();
