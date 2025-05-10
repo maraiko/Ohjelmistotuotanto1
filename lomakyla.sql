@@ -30,7 +30,7 @@ CREATE TABLE `asiakas` (
   `maa` varchar(255) NOT NULL,
   `yritys` tinyint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,13 +50,13 @@ DROP TABLE IF EXISTS `lasku`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `lasku` (
-  `lasku_id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `hinta` float NOT NULL,
   `laskutustapa` varchar(255) NOT NULL,
   `erapaiva` date NOT NULL,
   `tila` tinyint NOT NULL,
-  PRIMARY KEY (`lasku_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,12 +79,13 @@ CREATE TABLE `mokki` (
   `id` int NOT NULL AUTO_INCREMENT,
   `osoite` varchar(255) NOT NULL,
   `tila` tinyint NOT NULL,
-  `paivitetty` timestamp NOT NULL,
   `koko` int NOT NULL,
   `huoneet` int NOT NULL,
+  `hinta_per_yo` float NOT NULL,
   `luotu` datetime NOT NULL,
+  `paivitetty` timestamp NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,21 +106,21 @@ DROP TABLE IF EXISTS `varaus`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `varaus` (
   `varaus_id` int NOT NULL AUTO_INCREMENT,
-  `lopetuspaiva` datetime NOT NULL,
-  `aloituspaiva` datetime NOT NULL,
+  `aloituspaiva` date NOT NULL,
+  `lopetuspaiva` date NOT NULL,
   `luotu` datetime NOT NULL,
   `paivitetty` datetime NOT NULL,
   `asiakas_id` int NOT NULL,
   `mokki_id` int NOT NULL,
-  `lasku_id` int NOT NULL,
+  `lasku_id` int DEFAULT NULL,
   PRIMARY KEY (`varaus_id`),
   KEY `varaus_asiakas_id_foreign_idx` (`asiakas_id`),
   KEY `varaus_mokki_id_foreign_idx` (`mokki_id`),
   KEY `varaus_lasku_id_foreign_idx` (`lasku_id`),
   CONSTRAINT `varaus_asiakas_id_foreign` FOREIGN KEY (`asiakas_id`) REFERENCES `asiakas` (`id`),
-  CONSTRAINT `varaus_lasku_id_foreign` FOREIGN KEY (`lasku_id`) REFERENCES `lasku` (`lasku_id`),
+  CONSTRAINT `varaus_lasku_id_foreign` FOREIGN KEY (`lasku_id`) REFERENCES `lasku` (`id`),
   CONSTRAINT `varaus_mokki_id_foreign` FOREIGN KEY (`mokki_id`) REFERENCES `mokki` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,4 +141,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-03 20:14:33
+-- Dump completed on 2025-05-10 21:32:41
