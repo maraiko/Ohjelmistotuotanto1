@@ -3,12 +3,17 @@ package com.example.ohjelmistotuotanto;
 import javafx.application.Application;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -42,25 +47,50 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // BorderPane-ikkunat jokaiselle ruudulle + gridpane :D
+        // BorderPane-ikkunat jokaiselle ruudulle + gridpane aloitusikkunalle
         BorderPane alkuIkkuna = new BorderPane();
         BorderPane varausIkkuna = new BorderPane();
         BorderPane mokkiIkkuna = new BorderPane();
         BorderPane laskuIkkuna = new BorderPane();
         BorderPane asiakasIkkuna = new BorderPane();
-        GridPane aloitusIkkuna = new GridPane();
+        BorderPane aloitusIkkuna = new BorderPane();
+
+        // Värit ikkunoille
+        aloitusIkkuna.setStyle("-fx-background: cornflowerblue");
+        alkuIkkuna.setStyle("-fx-background: dodgerblue");
+        varausIkkuna.setStyle("-fx-background: lightcoral");
+        mokkiIkkuna.setStyle("-fx-background: lightsalmon");
+        asiakasIkkuna.setStyle("-fx-background: #FFEE8C"); // pastel yellow
+        laskuIkkuna.setStyle("-fx-background: palegreen");
+
+        // Padding ikkunoille
+        aloitusIkkuna.setPadding(new Insets(20,20,20,20));
 
         // Ruudut ja näyttämö
-        Scene alkuIkkunaScene = new Scene(alkuIkkuna, 1000, 700);
+        Scene alkuIkkunaScene = new Scene(alkuIkkuna,1000, 700);
         Scene varausIkkunaScene = new Scene(varausIkkuna, 1000, 700);
         Scene mokkiIkkunaScene = new Scene(mokkiIkkuna, 1000, 700);
         Scene laskuIkkunaScene = new Scene(laskuIkkuna, 1000, 700);
         Scene asiakasIkkunaScene = new Scene(asiakasIkkuna, 1000, 700);
         Scene aloitusIkkunaScene = new Scene(aloitusIkkuna, 1000, 700);
         primaryStage.setScene(aloitusIkkunaScene);
-        primaryStage.setTitle("Mökkien hallintajärjestelmä");
+        primaryStage.setTitle("lomaKylä");
         primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new Image("parhainlogoikina.png"));
         primaryStage.show();
+
+        // Alkuruudun labelit ja sun muut
+        Label userLabel = new Label("Käyttäjätunnus:");
+        userLabel.setFont(Font.font("Book Antiqua", 20));
+        TextField userField = new TextField();
+        Label passLabel = new Label("Salasana:");
+        passLabel.setFont(Font.font("Book Antiqua", 20));
+        PasswordField passField = new PasswordField();
+        Button loginButton = new Button("Kirjaudu");
+        loginButton.setFont(Font.font("Book Antiqua", 18));
+        Label messageLabel = new Label("Väärä käyttäjätunnus tai salasana.");
+        messageLabel.setFont(Font.font("Book Antiqua", 20));
+        messageLabel.setVisible(false);
 
         // Navigaatiopainikkeet
         Button varaukset = new Button("Varaukset");
@@ -71,11 +101,12 @@ public class Main extends Application {
         Button takaisin2 = new Button("Takaisin");
         Button takaisin3 = new Button("Takaisin");
         Button takaisin4 = new Button("Takaisin");
-        Button logout = new Button("Logout");
+        Button logout = new Button("Kirjaudu ulos");
         Button lisaaAsiakasPainike = new Button("Lisää");
         Button lisaaMokkiPainike = new Button("Lisää");
         Button lisaaLaskuPainike = new Button("Lisää");
-        Button guestLogin = new Button("Guest Login");
+        Button guestLogin = new Button("Kirjaudu vierailijana");
+        guestLogin.setFont(Font.font("Book Antiqua",16));
 
         // Painike asiakkaan poistamiselle
         Button poistaAsiakasPainike = new Button("Poista");
@@ -129,21 +160,16 @@ public class Main extends Application {
             poistaAsiakasPainike.setVisible(false);
             poistaMokkiPainike.setVisible(false);
             poistaLaskuPainike.setVisible(false);
+            messageLabel.setVisible(false);
         });
-        //alkuruudun labelit ja sun muut
-        Label userLabel = new Label("Käyttäjätunnus:");
-        TextField userField = new TextField();
-        Label passLabel = new Label("Salasana:");
-        PasswordField passField = new PasswordField();
-        Button loginButton = new Button("Kirjaudu");
-        Label messageLabel = new Label();
+
         // Login-napin toiminta
         loginButton.setOnAction(e -> {
             String username = userField.getText();
             String password = passField.getText();
 
-            // tarkistus
-            if (username.equals("admin") && password.equals("salasana")) {
+            // Tarkistus
+            if (username.equals(DBCONNECT.getDB_NAME()) && password.equals(DBCONNECT.getDB_PASSWORD())) {
                 primaryStage.setScene(alkuIkkunaScene);
                 userField.clear();
                 passField.clear();
@@ -157,26 +183,57 @@ public class Main extends Application {
                 poistaAsiakasPainike.setVisible(true);
                 poistaMokkiPainike.setVisible(true);
                 poistaLaskuPainike.setVisible(true);
-            } else {
-                messageLabel.setText("Väärä käyttäjätunnus tai salasana.");
+                messageLabel.setVisible(false);
+            }
+            else {
+                messageLabel.setVisible(true);
                 userField.clear();
                 passField.clear();
             }
         });
-        aloitusIkkuna.setPadding(new Insets(20));
-        aloitusIkkuna.setHgap(20);
-        aloitusIkkuna.setVgap(20);
 
-        aloitusIkkuna.add(userLabel, 0, 0);
-        aloitusIkkuna.add(userField, 1, 0);
-        aloitusIkkuna.add(passLabel, 0, 1);
-        aloitusIkkuna.add(passField, 1, 1);
-        aloitusIkkuna.add(loginButton, 1, 2);
-        aloitusIkkuna.add(messageLabel, 1, 3);
-        aloitusIkkuna.add(guestLogin, 0, 2);
+        // Aloitusikkunan asettelu
+        GridPane aloitusKeski = new GridPane();
+        aloitusKeski.setPadding(new Insets(20));
+        aloitusKeski.setHgap(20);
+        aloitusKeski.setVgap(20);
+
+        aloitusKeski.add(userLabel, 0, 0);
+        aloitusKeski.add(userField, 1, 0);
+        aloitusKeski.add(passLabel, 0, 1);
+        aloitusKeski.add(passField, 1, 1);
+        aloitusKeski.add(loginButton, 0, 2);
+        aloitusKeski.add(messageLabel, 1, 2);
+
+        aloitusIkkuna.setCenter(aloitusKeski);
+
+        // Muut audiovisuaaliset jutut aloitusikkunaan
+        Text kirjaudu = new Text("Kirjaudu lomaKylään:");
+        kirjaudu.setFont(Font.font("Book Antiqua",30));
+        aloitusIkkuna.setTop(kirjaudu);
+
+        Image logo = new Image("parhainlogoikina.png");
+        ImageView naytalogo = new ImageView(logo);
+        naytalogo.setFitHeight(300);
+        naytalogo.setFitWidth(300);
+
+        VBox aloitusVasen = new VBox();
+        aloitusVasen.getChildren().addAll(naytalogo,guestLogin);
+        aloitusVasen.setSpacing(20);
+        aloitusIkkuna.setLeft(aloitusVasen);
+
+        Image kuva = new Image("pexels-markusspiske-92651.jpg");
+        ImageView naytakuva = new ImageView(kuva);
+        naytakuva.setFitHeight(260);
+        naytakuva.setFitWidth(960);
+        aloitusIkkuna.setBottom(naytakuva);
+
+        // Slider aani = new Slider();
+        // aani.setOrientation(Orientation.VERTICAL);
+        // aloitusIkkuna.setRight(aani);
 
         // Asiakastiedot tauluun
-        TableColumn<AsiakasTiedot, Integer> asiakas_idCol = new TableColumn<>("Asiakas ID");
+        TableColumn<AsiakasTiedot, Integer> asiakas_idCol = new TableColumn<>("Asiakkaan ID");
         asiakas_idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<AsiakasTiedot, String> sahkopostiCol = new TableColumn<>("Sähköposti");
         sahkopostiCol.setCellValueFactory(new PropertyValueFactory<>("sahkoposti"));
@@ -190,11 +247,11 @@ public class Main extends Application {
         yritysCol.setCellValueFactory(new PropertyValueFactory<>("yritys"));
 
         // Mökkitiedot tauluun
-        TableColumn<MokkiTiedot, Integer> mokki_IdCol = new TableColumn<>("Mökki ID");
+        TableColumn<MokkiTiedot, Integer> mokki_IdCol = new TableColumn<>("Mökin ID");
         mokki_IdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<MokkiTiedot, String> osoiteCol = new TableColumn<>("Osoite");
         osoiteCol.setCellValueFactory(new PropertyValueFactory<>("osoite"));
-        TableColumn<MokkiTiedot, Boolean> tilaCol1 = new TableColumn<>("Käytössä?");
+        TableColumn<MokkiTiedot, Boolean> tilaCol1 = new TableColumn<>("Käytössä");
         tilaCol1.setCellValueFactory(new PropertyValueFactory<>("tila"));
         TableColumn<MokkiTiedot, Integer> huoneetCol = new TableColumn<>("Huoneet");
         huoneetCol.setCellValueFactory(new PropertyValueFactory<>("huoneet"));
@@ -206,9 +263,9 @@ public class Main extends Application {
         paivitettyCol.setCellValueFactory(new PropertyValueFactory<>("paivitetty"));
 
         // Laskutiedot tauluun
-        TableColumn<LaskuTiedot, Integer> laskuIdCol = new TableColumn<>("Lasku ID");
+        TableColumn<LaskuTiedot, Integer> laskuIdCol = new TableColumn<>("Laskun ID");
         laskuIdCol.setCellValueFactory(new PropertyValueFactory<>("laskuId"));
-        TableColumn<LaskuTiedot, Boolean> tilaCol = new TableColumn<>("Maksettu?");
+        TableColumn<LaskuTiedot, Boolean> tilaCol = new TableColumn<>("Maksettu");
         tilaCol.setCellValueFactory(new PropertyValueFactory<>("tila"));
         TableColumn<LaskuTiedot, Float> hintaCol = new TableColumn<>("Hinta");
         hintaCol.setCellValueFactory(new PropertyValueFactory<>("hinta"));
@@ -218,13 +275,13 @@ public class Main extends Application {
         erapaivaCol.setCellValueFactory(new PropertyValueFactory<>("erapaiva"));
 
         // Varaustiedot tauluun
-        TableColumn<VarausTiedot, Integer> varausIdCol = new TableColumn<>("Varaus ID");
+        TableColumn<VarausTiedot, Integer> varausIdCol = new TableColumn<>("Varauksen ID");
         varausIdCol.setCellValueFactory(new PropertyValueFactory<>("varausId"));
-        TableColumn<VarausTiedot, String> asiakasIdCol = new TableColumn<>("Asiakas ID");
+        TableColumn<VarausTiedot, String> asiakasIdCol = new TableColumn<>("Asiakkaan ID");
         asiakasIdCol.setCellValueFactory(new PropertyValueFactory<>("asiakasId"));
-        TableColumn<VarausTiedot, String> mokkiIdCol = new TableColumn<>("Mokki ID");
+        TableColumn<VarausTiedot, String> mokkiIdCol = new TableColumn<>("Mokin ID");
         mokkiIdCol.setCellValueFactory(new PropertyValueFactory<>("mokkiId"));
-        TableColumn<VarausTiedot, Integer> lasku_IdCol = new TableColumn<>("Lasku ID");
+        TableColumn<VarausTiedot, Integer> lasku_IdCol = new TableColumn<>("Laskun ID");
         lasku_IdCol.setCellValueFactory(new PropertyValueFactory<>("laskuId"));
         TableColumn<VarausTiedot, Date> aloituspaivaCol = new TableColumn<>("Aloituspäivä");
         aloituspaivaCol.setCellValueFactory(new PropertyValueFactory<>("aloituspaiva"));
@@ -466,7 +523,6 @@ public class Main extends Application {
             int koko = Integer.parseInt(kokoTextField.getText());
             int huoneet = Integer.parseInt(huoneetTextField.getText());
 
-
             lisaaMokki(osoite, tila, huoneet, koko, paivitetty, luotu);
             mokkiTiedotTableView.setItems(DBCONNECT.haeMokit());
 
@@ -491,7 +547,6 @@ public class Main extends Application {
             erapaivaDatePicker.setValue(null);
             tilaCheckBox.setSelected(false);
         });
-
 
         // VBox varaustietoruudun tekstikentille
         VBox varausTietoVBox = new VBox();
