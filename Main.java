@@ -120,7 +120,7 @@ public class Main extends Application {
         Button poistaMokkiPainike = new Button("Poista");
         Button poistaLaskuPainike = new Button("Poista lasku ja varaus");
         Button poistaVarausPainike = new Button("Poista varaus ja lasku");
-        Label loremLabel = new Label();
+        Label varausTeksti = new Label();
         guestLogin.setFont(Font.font("Book Antiqua",16));
 
         // Nappien toiminnallisuus
@@ -166,7 +166,7 @@ public class Main extends Application {
             poistaLaskuPainike.setVisible(false);
             poistaVarausPainike.setVisible(false);
             messageLabel.setVisible(false);
-            loremLabel.setVisible(false);
+            varausTeksti.setVisible(false);
         });
 
         // Login-napin toiminta
@@ -192,7 +192,7 @@ public class Main extends Application {
                 poistaLaskuPainike.setVisible(true);
                 poistaVarausPainike.setVisible(true);
                 messageLabel.setVisible(false);
-                loremLabel.setVisible(true);
+                varausTeksti.setVisible(true);
             }
             else {
                 messageLabel.setVisible(true);
@@ -664,7 +664,7 @@ public class Main extends Application {
         aloituspaivaDatePicker.setStyle(textfieldStyle);
         lopetuspaivaDatePicker.setStyle(textfieldStyle);
         laskutustapaComboBox.setStyle(textfieldStyle);
-        loremLabel.setText("Valitse ensiksi asiakkaan ID\n" +
+        varausTeksti.setText("Valitse ensiksi asiakkaan ID\n" +
                 "ja mökin ID taulukoista.\n" +
                 "Sitten, luo varaus käyttäen\n" +
                 "ID:eitä.");
@@ -672,8 +672,8 @@ public class Main extends Application {
         lisaaVarausPainike.setPrefWidth(250);
         poistaVarausPainike.setPrefWidth(250);
 
-        loremLabel.setMaxWidth(250);
-        loremLabel.setStyle(
+        varausTeksti.setMaxWidth(250);
+        varausTeksti.setStyle(
                 "-fx-font-size: 18px;" +
                         "-fx-padding: 10px;" +
                         "-fx-text-fill: #333333;" +
@@ -760,7 +760,7 @@ public class Main extends Application {
         VBox varausTietoVBox = new VBox();
         varausTietoVBox.setPadding(new Insets(5, 5, 5, 5));
         varausTietoVBox.setSpacing(10);
-        varausTietoVBox.getChildren().addAll(asiakasIdTextField, mokkiIdTextField, laskutustapaComboBox, aloituspaivaDatePicker, lopetuspaivaDatePicker, lisaaVarausPainike, poistaVarausPainike, loremLabel);
+        varausTietoVBox.getChildren().addAll(asiakasIdTextField, mokkiIdTextField, laskutustapaComboBox, aloituspaivaDatePicker, lopetuspaivaDatePicker, lisaaVarausPainike, poistaVarausPainike, varausTeksti);
 
         // VBox asiakastietoruudun tekstikentille
         VBox asiakasTietoVBox = new VBox();
