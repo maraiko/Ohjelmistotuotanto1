@@ -6,14 +6,14 @@ import java.time.LocalDateTime;
  * Luokka laskuihin liittyville tiedoille ja niiden käsittelylle SQL:ssä
  */
 public class LaskuTiedot {
-    private int laskuId;
+    private int id;
     private float hinta;
     private String laskutustapa;
     private LocalDateTime erapaiva;
     private boolean tila;
 
-    public LaskuTiedot(int laskuId, float hinta, String laskutustapa, LocalDateTime erapaiva, boolean tila) {
-        this.laskuId = laskuId;
+    public LaskuTiedot(int id, float hinta, String laskutustapa, LocalDateTime erapaiva, boolean tila) {
+        this.id = id;
         this.hinta = hinta;
         this.laskutustapa = laskutustapa;
         this.erapaiva = erapaiva;
@@ -21,11 +21,7 @@ public class LaskuTiedot {
     }
 
     public int getLaskuId() {
-        return laskuId;
-    }
-
-    public void setLaskuId(int laskuId) {
-        this.laskuId = laskuId;
+        return id;
     }
 
     public float getHinta() {
