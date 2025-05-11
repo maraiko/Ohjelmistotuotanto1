@@ -1,4 +1,5 @@
 # Ohjelmistotuotanto1
+## Yleistä tietoa
 Tekijät: Lassi Uosukainen, Markus Martikainen ja Antti Jumpponen
 
 Tiedostot kattavat Ohjelmistotuotanto 1 -projektin, joka on Mökkikylät-yrityksen sisäinen lomaKylä-järjestelmä. Järjestelmässä on tarkoitus hallinnoida Mökkikylät-yrityksen omistamiin mökkeihin liittyviä varauksia, laskuja ja asiakkaita.
