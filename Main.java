@@ -70,7 +70,7 @@ public class Main extends Application {
         asiakasIkkuna.setPadding(new Insets(20,20,20,20));
 
         // Taustakuva aloitusikkunalle
-        Image image1 = new Image("file:mokki.jpg");
+        Image image1 = new Image("mokki.jpg");
         BackgroundSize bSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true);
         Background background2 = new Background(new BackgroundImage(image1, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, bSize));
         aloitusIkkuna.setBackground(background2);
@@ -97,7 +97,7 @@ public class Main extends Application {
         Scene aloitusIkkunaScene = new Scene(aloitusIkkuna, 1000, 700);
         primaryStage.setScene(aloitusIkkunaScene);
         primaryStage.setTitle("lomaKylä");
-        primaryStage.getIcons().add(new Image("file:parhainlogoikina.png"));
+        primaryStage.getIcons().add(new Image("parhainlogoikina.png"));
         primaryStage.setResizable(false);
         primaryStage.show();
 
@@ -223,7 +223,7 @@ public class Main extends Application {
         aloitusKeski.setMaxWidth(400);
         
         // Muut audiovisuaaliset jutut aloitusikkunaan
-        Image logo = new Image("file:parhainlogoikina.png");
+        Image logo = new Image("parhainlogoikina.png");
         ImageView naytalogo = new ImageView(logo);
         naytalogo.setFitHeight(300);
         naytalogo.setFitWidth(300);
