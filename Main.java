@@ -264,7 +264,7 @@ public class Main extends Application {
                             "-fx-background-radius: 20px;" +
                             "-fx-border-radius: 20px;" +
                             "-fx-border-color: transparent;" +
-                            "-fx-pref-width: 153px;" +
+                            "-fx-pref-width: 165px;" +
                             "-fx-alignment: center;";
 
         String buttonStyle = "-fx-background-color: linear-gradient(to right, #33CCB3, #0099FF);" +
